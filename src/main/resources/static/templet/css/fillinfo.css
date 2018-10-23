@@ -1,0 +1,451 @@
+textarea{
+	width:100%;
+	height:90%;
+	resize:none;
+	text-align: left;
+	outline: none;
+	border:none;
+	text-indent: 1em;
+}
+.overall-process{
+	width:100%;
+	height:46px;
+	background:url(../images/process-first.png) no-repeat center center;
+}
+.current-process{
+	margin:40px 0 20px 0;
+	text-align: center;
+	font-size:20px;
+	font-weight: bold;
+}
+.content table{
+	width:100%;	
+	border-collapse: collapse;
+	color:#333;
+}
+td img.img-word{
+	width:20px;
+	vertical-align: bottom;
+	margin-left:5px;
+}
+.content table tr{
+}
+.content table td li{
+	text-align: left;
+}
+.content table tr td{
+	border:1px solid #dcdcdc;
+	text-align:center;
+	height:40px;
+	padding: 0 10px;
+
+}
+
+.content table  tr.tr1 td{
+	/*width:78%;*/
+}
+.content table  tr.tr2 td{
+	/*width:calc(78% / 6);	*/
+}
+.content table  tr.tr3 td{
+	/*width:calc(78% / 6);		*/
+}
+.content table  tr.tr4 td{
+	/*width:calc(78% / 3);	*/
+}
+.content table  tr.tr5 td{
+	/*width:78%;*/	
+}.content table  tr.tr6 td{
+	/*width:78%;*/
+}
+.content table  tr.tr7 td{
+	/*width:78%;*/
+}
+.content table  tr.tr8 td{
+	/*width:78%;*/
+}
+.content table  tr.tr9 td{
+	/*width:78%;*/
+}
+.content table  tr.tr10 td{
+	/*width:78%;*/
+}
+.content table  tr.tr11 td{
+	/*width:78%;*/
+}
+.content table  tr.tr12 td{
+	/*width:78%;*/
+}
+.content table  tr.tr13 td{
+	/*width:78%;*/
+}
+.content table  tr.tr14 td{
+	/*width:calc(78% / 5);*/
+}
+.content table  tr.tr15 td{
+	/*width:calc(78% / 3);*/
+}
+.content table  tr.tr16 td{
+	/*width:calc(78% / 3);*/
+}
+.content table  tr.tr17 td{
+	width:calc(78% / 6);
+}
+.content table  tr td:nth-child(1){
+	background-color: #d1e8ff;
+	white-space:nowrap;
+}
+
+.content table  tr td input[type='text']{
+	width:100%;
+	height: 100%;
+	border:none;
+	outline: none;
+	/*text-indent: 1em;*/
+	text-align: center;
+}
+.content table  tr td.min-input input[type='text']{
+	height:60%;
+	width: calc(100% - 4em);
+	
+}
+.content table  tr td input[type='radio'],.content table  tr td input[type='checkbox']{
+	width:1.5em;
+	height:1.2em;
+	vertical-align:bottom;
+}
+td span.prove {
+	font-size:12px;
+	color:gray;
+}
+
+/*row1:单位名称*/
+
+.content table tr:nth-child(1) td{
+
+}
+/*row2:单位负责人*/
+.content table tr:nth-child(2) td{
+	
+}
+.content table tr:nth-child(2) td:nth-child(2n){
+	background-color: #d1e8ff
+}
+
+/*row3:申报联系人*/
+.content table tr:nth-child(3) td:nth-child(2n){
+	background-color: #d1e8ff
+}
+
+/*row4:注册资本*/
+.content table tr:nth-child(4) td:nth-child(3){
+	background-color:#d1e8ff ;
+}
+/*row5:单位注册地址*/
+.content table tr:nth-child(5){
+
+}
+/*row6:单位办公地址*/
+.content table tr:nth-child(6){
+
+}
+/*row7:统一社会信用代码*/
+.content table tr:nth-child(7){
+
+}
+/*row8:单位性质*/
+.content table tr:nth-child(8) li{
+	line-height: 1.2em;
+	margin:5px 0;
+	float:left;
+	width:calc(100% / 6);
+}
+.content table tr:nth-child(8) li label{
+	
+}
+
+
+.content table tr:nth-child(8) li:last-child{
+	clear: both;
+	width:100%;
+}
+.content table tr:nth-child(8) li:last-child input[type='text']{
+	width:30%;
+	/*height:40px;*/
+	border-bottom: 1px solid rgb(161, 155, 155);
+}
+
+/*row9:主营业务*/
+.content table tr:nth-child(9) li{
+	line-height: 1.2em;
+	margin:10px 0;
+	float:left;
+	width:calc(100% / 6);
+}
+.content table tr:nth-child(9) li label{
+	cursor:pointer;
+}
+
+
+.content table tr:nth-child(9) li:last-child{
+	clear: both;
+	width:100%;
+}
+.content table tr:nth-child(9) li:last-child input[type='text']{
+	width:30%;
+	/*height:40px;*/
+	border-bottom: 1px solid rgb(161, 155, 155);
+}
+/*row10:是否上市公司*/
+.content table tr:nth-child(10) li{
+	margin:10px 0; 
+}
+.content table tr:nth-child(10) li input[type='text']{
+	width:25%;
+	border-bottom: 1px solid rgb(161, 155, 155);
+}
+/*row11:是否有业务出口*/
+	.content table tr:nth-child(11) li{
+	margin:10px 0; 
+}
+.content table tr:nth-child(11) li input[type='text']{
+	width:30%;
+	border-bottom: 1px solid rgb(161, 155, 155);
+}
+/*row12:相关荣誉*/
+tr.honer .honor-box li {
+	width:100%;
+	margin:10px 0;
+}
+tr.honer .honor-box li span{
+	display: inline-block;
+	width:30%;
+	position: relative;
+}
+tr.honer .honor-box li span input[type='text']{
+	width:30%;
+	border-bottom:1px solid gray;
+}
+tr.honer .honor-box li::after{
+	display: block;
+	width:0;
+	height:0;
+	clear: both;
+	content:'.';
+	color:transparent;
+}
+
+tr.honer .honor-box li:nth-child(4) input{
+	width:40%;
+	border-bottom:1px solid gray;
+}
+
+/*row13:研发能力*/
+
+.development_ability{
+		height:80px;
+}
+.development_ability input{
+	width:100%;
+	height:100%;
+}
+
+/*row14:2016年主营业务收入（万元）*/
+.content table tr:nth-child(14){
+	height:70px;
+}
+.content table tr:nth-child(14) td:nth-child(3){
+	background-color: #d1e8ff
+}
+.content table tr:nth-child(14) td:nth-child(5){
+	background-color: #d1e8ff
+}
+/*row15:2016年税金总额（万元）*/
+.content table tr:nth-child(15){
+	height:60px;
+}
+.content table tr:nth-child(15) td:nth-child(3){
+	background-color: #d1e8ff
+}
+/*row16:单位总人数*/
+.content table tr:nth-child(16){
+	height:60px;
+}
+.content table tr:nth-child(16) td:nth-child(3){
+	background-color: #d1e8ff
+}
+/*row17:软件业务收入*/
+.content table tr:nth-child(17){
+	height:60px;
+}
+.content table tr:nth-child(17) td:nth-child(2n){
+	background-color: #d1e8ff	
+}
+.save{
+	height:46px;
+	margin:40px 0; 
+}
+.save button{
+	outline: none;
+	border: none;
+	display:block;
+	float: right;
+	width: 112px;
+	height: 46px;
+	border-radius:5px;
+	background-color: #076bce;
+	color: white;
+	line-height:46px;
+	font-size:22px;
+	text-align: center;
+	cursor:pointer;
+}
+.word{
+	display: none;
+}
+.word::before{
+		display: block;
+		width:0;
+		height:0;
+		clear: both;
+		content:'.';
+		color:transparent;
+	}
+
+.word ul {
+	padding: 20px;
+	background-color: #e5e9ec;
+	border-radius:5px;
+}
+.word li {
+	height:30px;
+	line-height:30px;
+}
+.word li a {
+	color:black;
+	padding-right:40px; 
+	background:url(../images/word-down.png) no-repeat right center; 
+}
+.word li a:hover{
+	text-decoration: underline;
+}
+.enter-scheme{
+	margin:50px auto 0 auto ;
+	display: block;
+	font-size:22px;
+	width: 440px;
+	height: 60px;
+	text-align: center;
+	line-height:60px;
+	color:white;
+	background-color:#076bce;
+	border-radius: 5px;
+	cursor: pointer;
+}
+#quoted_time{
+	height:23px;
+}
+.down-list {
+	position: relative;
+}
+.down-list .declare_intro{
+	 width: 66%;
+	 position: absolute;
+	 right: 20px;
+	 bottom: 20px;
+	 border: 1px solid gray;
+	 padding: 10px;
+	 border-radius:5px;
+	 color:black;
+}
+.down-list b{
+	font-weight: bold;
+}
+.waring{
+	padding-left:1em;
+	font-size:14px;
+	color:red;
+}
+.must{
+	color:red;
+	font-size:16px;
+	vertical-align: middle;
+}
+.must-remind{
+	margin-bottom:10px;
+	font-size:14px;
+	color:#333;
+	text-align: right;
+}	
+.must-remind span{
+	font-size: 20px;
+	color: red;
+	vertical-align: middle;
+}
+.quoted-box li:nth-child(1){
+	width:20%;
+	float: left;	
+}	
+.quoted-box li:nth-child(2){
+	width:20%;
+	float: left;	
+}
+.quoted-box li:nth-child(3){
+	clear: both;
+}
+
+.export-box li:nth-child(1){
+	width:20%;
+	float: left;	
+}	
+.export-box li:nth-child(2){
+	width:20%;
+	float: left;	
+}
+.export-box li:nth-child(3){
+	clear: both;
+}
+
+#quoted_time{
+	
+}
+.company_overview{
+	text-align: center;
+	margin:30px auto; 
+	font-family: 'SimHei' , 'SimSun' !important;
+}
+hr.split{
+	margin:50px auto;
+}
+.content-mask{
+	position: fixed;
+	width:100%;
+	height:100%;
+	left:0;
+	top:0;
+	z-index: 99999;
+}
+/*远程html*/
+.remote-html{
+	line-height: 2em;
+	padding:30px;
+}
+.remote-html * {
+	/*color:#333 !important;*/
+	/*font-size:16px !important;*/
+	/*font-family: "Microsoft YaHei" !important;*/
+	/*font-style: normal !important;*/
+	/*font-weight:normal !important;*/
+}
+.remote-html table{
+	width:100%;
+}
+.remote-html table td{
+	height:40px;
+	border:1px solid #dcdcdc;
+	padding:5px; 
+}
+.remote-html table td *{
+	font-size:16px !important;
+}
+

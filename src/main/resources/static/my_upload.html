@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" class="my-upload">
+<head>
+    <meta charset="UTF-8">
+    <title>我的上传</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="css/my_upload.css">
+    <script src="./js/jquery-3.2.1.js"></script>
+    <script src="./js/getPath.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="js/my_upload.js"></script>
+</head>
+<body>
+    <div class="header"></div>
+    <div class="main">
+        <div class="main-con">
+            <div class="main-top">
+                <h3 class="title">大数据优秀产品</h3>
+                <div class="top-table">
+                    <table id="top_mark" border="1px" bordercolor="#dcdcdc" cellspacing="0px" style="border-collapse:collapse">
+                         <thead>
+                             <tr>
+                                 <th>序号</th>
+                                 <th>文件编号</th>
+                                 <th>申报单位</th>
+                                 <th>申报文件</th>
+                                 <th>评审状态</th>
+                                 <th>提交时间</th>
+                                 <th>操作</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                            <!--<tr>
+                                <td>1</td>
+                                <td>北京东方国信科技股份有限公司北京东方国信科技股份有限公司</td>
+                                <td></span>xxx公司大数据产品申报案例北京东方国信科技股份有限公司</td>
+                                <td>2017/09/09</td>
+                                <td><span class="preview_file">预览</span></td>
+                            </tr>-->
+                         </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="main-bottom">
+                <h3 class="title">大数据优秀应用解决方案</h3>
+                <div class="top-table">
+                    <table id="bottom_mark" border="1px" bordercolor="#dcdcdc" cellspacing="0px" style="border-collapse:collapse">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>文件编号</th>
+                                <th>申报单位</th>
+                                <th>申报文件</th>
+                                <th>评审状态</th>
+                                <th>提交时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="dialog-review">
+        <div class="dialog-header">
+            <div class="dialog-title"></div>
+            <a href="javascript:;" class="dialog-close">返回</a>
+         </div>
+        <div class="dialog-content">
+            <div class="left-content">
+               <!-- 待填充 -->
+            </div>
+        </div>
+    </div>
+
+   <!-- <div class="modal">
+        <div class="modal_dialog">
+            <div class="top"></div>
+            <div class="close"></div>
+            <h3 class="title">申报单位信息</h3>
+            <form method="post" action="" id="declare-form" class="modal-content">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td colspan="4"><span class="must">*</span>单位名称</td>
+                        <td colspan="15"></td>
+                    </tr>
+                    <tr class="tr2">
+                        <td colspan="4">单位负责人</td>
+                        <td colspan="2" class="bg-color"><span class="must">*</span>姓名</td>
+                        <td colspan="3"></td>
+                        <td colspan="2" class="bg-color"><span class="must">*</span>电话</td>
+                        <td colspan="3"></td>
+                        <td colspan="2" class="bg-color"><span class="must">*</span>邮箱</td>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr class="tr3">
+                        <td colspan="4">申报联系人</td>
+                        <td colspan="2" class="bg-color"><span class="must">*</span>姓名</td>
+                        <td colspan="3"></td>
+                        <td colspan="2" class="bg-color"><span class="must">*</span>电话</td>
+                        <td colspan="3"></td>
+                        <td colspan="2" class="bg-color"><span class="must">*</span>邮箱</td>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr class="tr4">
+                        <td colspan="4"><span class="must">*</span>注册资本</td>
+                        <td colspan="5">万元</td>
+                        <td colspan="5" class="bg-color"><span class="must">*</span>法定代表人</td>
+                        <td colspan="5"></td>
+                    </tr>
+
+                    <tr class="tr5">
+                        <td colspan="4"><span class="must">*</span>单位注册地址</td>
+                        <td colspan="15"></td>
+                    </tr>
+                    <tr class="tr6">
+                        <td colspan="4"><span class="must">*</span>单位办公地址</td>
+                        <td colspan="15"></td>
+                    </tr>
+                    <tr class="tr7">
+                        <td colspan="4"><span class="must">*</span>统一社会信用代码</td>
+                        <td colspan="15"></td>
+                    </tr>
+
+                    <tr class="tr8">
+                        <td colspan="4"><span class="must">*</span>单位性质</td>
+                        <td colspan="15" class="property-box">
+                            <ul id="property-box">
+                                &lt;!&ndash; <li>
+                                     <input type="radio" name="brand" value="1"/><span>品效满盈</span>
+                                 </li>&ndash;&gt;
+                            </ul>
+                            <ul class="property-last">
+                                <li>
+                                    其他（请注明）：<input placeholder="（选填）" class="nomust" type="text">
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr class="tr9">
+                        <td colspan="4"><span class="must">*</span>主营业务</td>
+                        <td colspan="15" class="business-box">
+                            <ul id="business-box">
+                                <li>
+                                    <input type="checkbox" name="brand" value="1"/><span>品效满盈</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="brand" value="2" /><span>数据城</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="brand" value="3"/><span>魔数智投</span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="brand" value="4"/><span>粉丝镜</span>
+                                </li>
+                            </ul>
+                            <ul class="business-last">
+                                <li>
+                                    其他（请注明）：<input placeholder="（选填）" class="nomust" type="text">
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <tr class="quoted tr10">
+                        <td colspan="4"><span class="must">*</span>是否上市公司</td>
+                        <td colspan="15" class="quoted-box">
+                            <ul>
+                                <li><label><input name="quoted_state" type="radio" value="0">否</label></li>
+                                <li><label><input name="quoted_state" type="radio" value="1">是</label></li>
+                                <li><span>上市时间：</span><input name="quoted_time"  type="text" id="quoted_time" readonly="readonly" /></li>
+                                <li><span>上市地点：</span><input name="quoted_address" type="text"></li>
+                                <li><span>股票代码：</span><input name="shares_code" type="text"></li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <tr class="export tr11">
+                        <td colspan="4"><span class="must">*</span>是否有业务出口</td>
+                        <td colspan="15" class="export-box">
+                            <ul>
+                                <li><label><input name="export_state" type="radio" value="0">否</label></li>
+                                <li><label><input name="export_state" type="radio" value="1">是</label></li>
+                                <li><span>主要出口地点：</span><input name="export_address" type="text"></li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <tr class="honer tr12">
+                        <td colspan="4">相关荣誉<br><span class="prove">（需在申报书中提供证明材料）</span></td>
+                        <td colspan="15" class="honor-box">
+                            <ul>
+                                <li data-honor_id="1">
+                                    <span>高新技术企业</span>
+                                    <span data-honor_level="1">国家级：<input placeholder="（选填）" class="nomust" name="get_year" type="text">年（授予）</span>
+                                    <span  data-honor_level="2">市级：<input placeholder="（选填）" class="nomust" name="get_year" type="text">年（授予）</span>
+                                </li>
+                                <li data-honor_id="2">
+                                    <span>企业技术中心</span>
+                                    <span data-honor_level="1">国家级：<input placeholder="（选填）" class="nomust" name="get_year" type="text">年（授予）</span>
+                                    <span data-honor_level="2">市级：<input placeholder="（选填）" class="nomust" name="get_year" type="text">年（授予）</span>
+                                </li>
+                                <li data-honor_id="3">
+                                    <span>重点实验室</span>
+                                    <span data-honor_level="1">国家级：<input placeholder="（选填）" class="nomust" name="get_year" type="text">年（授予）</span>
+                                    <span data-honor_level="2">市级：<input placeholder="（选填）" class="nomust" name="get_year" type="text">年（授予）</span>
+                                </li>
+                                <li>其他市级以上荣誉自行添加：<input placeholder="（选填）" class="nomust" name="honor_describe" type="text"></li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <tr class="development_ability tr13">
+                        <td colspan="4">研发能力<br><span class="prove">（需在申报书中提供证明材料）</span></td>
+                        <td colspan="15">
+
+                        </td>
+                    </tr>
+
+                    <tr class="tr14">
+                        <td colspan="4"><span class="must">*</span>2016年主营业务收入<br><span class="prove">（需在申报书中提供证明材料）</span></td>
+                        <td colspan="3" class="min-input">
+                            万元
+                        </td>
+                        <td colspan="4" class="bg-color" style="white-space:nowrap;">
+                            <span class="must">*</span>2016年研发投入<br><span class="prove">（需在申报书中提供证明材料）</span>
+                        </td>
+                        <td colspan="2" class="min-input">
+                            99999万元
+                        </td>
+                        <td colspan="3" class="bg-color">
+                            <span class="must">*</span>2016大数据业务收入
+                        </td>
+                        <td colspan="3" class="min-input">
+                            万元
+                        </td>
+                    </tr>
+
+                    <tr class="tr15">
+                        <td colspan="4"><span class="must">*</span>2016年税金总额</td>
+                        <td colspan="5" class="min-input">
+                            万元
+                        </td>
+                        <td colspan="5" class="bg-color"><span class="must">*</span>2016年净利润</td>
+                        <td colspan="5" class="min-input">
+                            万元
+                        </td>
+                    </tr>
+
+                    <tr class="tr16">
+                        <td colspan="4"><span class="must">*</span>单位总人数</td>
+                        <td colspan="5" class="min-input">
+                            名
+                        </td>
+                        <td colspan="5" class="bg-color"><span class="must">*</span>研发人员规模</td>
+                        <td colspan="5" class="min-input">
+                            名
+                        </td>
+                    </tr>
+                    <tr class="tr17">
+                        <td colspan="4">2016年软件业务收入<br><span class="prove">（软件企业必填）</span></td>
+                        <td colspan="2" class="bg-color">产品收入总额</td>
+                        <td colspan="3" class="min-input">
+                            万元
+                        </td>
+                        <td colspan="3" class="bg-color">信息技术服务收入总额</td>
+                        <td colspan="2" class="min-input">
+                            万元
+                        </td>
+                        <td colspan="3" class="bg-color">嵌入式系统软件收入总额</td>
+                        <td colspan="2" class="min-input">
+                            万元
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>-->
+
+    <script>
+        $(function() {
+            //生成头部
+            new Header({
+                ele: $('.header')[0],
+                showNav: true,
+                showExit:true
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

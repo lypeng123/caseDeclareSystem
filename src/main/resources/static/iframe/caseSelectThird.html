@@ -1,0 +1,159 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="css/caseSelectThird.css">
+<script src="../js/jquery-1.11.3.js"></script>
+<script src="../js/getPath.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/jqPaginator.js"></script>
+<script src="js/caseSelectThird.js"></script>
+
+    <ul class="review-list clearfix">
+        <li class="current"><a href="#case_select">案例筛选</a></li>
+        <li><a href="#review_list">最终入选清单</a></li>
+    </ul>
+
+    <div>
+        <!--案例筛选-->
+        <div id="case_select" style="display:block">
+            <!--通过与不通过-->
+            <div class="pass-con clearfix">
+                <div class="pass-confr">
+                    <a id="pass_is" href="javascript:;">通过</a>
+                    <a id="pass_no" href="javascript:;">不通过</a>
+                </div>
+            </div>
+
+            <ul class="select-item clearfix">
+                <li>
+                    <span>案例分类：</span>
+                    <select name="" id="case_kind">
+                        <option value=" ">全部</option>
+                        <option value="0">大数据产品</option>
+                        <option value="1">大数据应用解决方案</option>
+                    </select>
+                </li>
+                <li>
+                    <span>单位所在省市：</span>
+                    <select name="" id="sele_province">
+                        <!-- <option value="1">全部</option>
+                         <option value="1">是</option>
+                         <option value="1">否</option>-->
+                    </select>
+                </li>
+                <li>
+                    <span>两轮综合得分大于</span>
+                    <input id="sele_score" type="text" value="">&nbsp;分
+                    <p class="tip-con"></p>
+                </li>
+                <li class="select-is">
+                    <a href="#">确&nbsp;定</a>
+                </li>
+            </ul>
+            <div class="table-file clearfix">
+                <p class="data-none"></p>
+                <table id="table_mark" class="table_mark" border="1px" bordercolor="#dcdcdc" cellspacing="0px" style="border-collapse:collapse">
+                   <!-- <thead>
+                        <tr>
+                            <th width="5%">文件号</th>
+                            <th width="25%">申报公司</th>
+                            <th width="25%"><span class="sele-all">全选</span>申报文件</th>
+                            <th width="10%">第一轮专家<br>评审得分</th>
+                            <th width="10%">第二轮专家<br>评审得分</th>
+                            <th width="10%">两轮评审综合<br>得分</th>
+                            <th width="10%">提交时间</th>
+                            <th width="5%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>北京东方国信科技股份有限公司北京东方国信科技股份有限公司</td>
+                        <td><span class="sele-icon is-icon"></span>xxx公司大数据产品申报案例北京东方国信科技股份有限公司</td>
+                        <td>100</td>
+                        <td>100</td>
+                        <td>100</td>
+                        <td>2017/09/09</td>
+                        <td><span class="preview_file">查看</span></td>
+                    </tr>
+                    </tbody>-->
+                </table>
+                <!--分页-->
+                <div class="page"><span id="paging"></span></div>
+            </div>
+        </div>
+
+
+        <!--评审清单-->
+        <div id="review_list" style="display: none;">
+           <ul class="select-item clearfix">
+               <li>
+                   <span>案例分类：</span>
+                   <select name="" id="case_kind2">
+                       <option value=" ">全部</option>
+                       <option value="0">大数据产品</option>
+                       <option value="1">大数据应用解决方案</option>
+                   </select>
+               </li>
+               <li>
+                   <span>单位所在省市：</span>
+                   <select name="" id="sele_province2">
+                       <!--<option value="1">全部</option>
+                       <option value="1">是</option>
+                       <option value="1">否</option>-->
+                   </select>
+               </li>
+               <li>
+                   <span>两轮综合得分大于</span>
+                   <input id="sele_score2" type="text" value="">&nbsp;分
+                   <p class="tip-con"></p>
+               </li>
+               <li class="select-is2">
+                   <a href="#">确&nbsp;定</a>
+               </li>
+           </ul>
+
+           <div class="table-pass clearfix">
+               <p class="data-none"></p>
+               <table id="table_pass" class="table_mark" border="1px" bordercolor="#dcdcdc" cellspacing="0px" style="border-collapse:collapse">
+                   <!-- <thead>
+                        <tr>
+                            <th width="5%">文件号</th>
+                            <th width="20%">申报公司</th>
+                            <th width="20%">申报文件</th>
+                            <th width="10%">第一轮专家<br>评审得分</th>
+                            <th width="10%">第二轮专家<br>评审得分</th>
+                            <th width="10%">两轮评审<br>评审得分</th>
+                            <th width="10%">提交时间</th>
+                            <th width="10%">入选时间</th>
+                            <th width="5%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>北京东方国信科技股份有限公司北京东方国信科技股份有限公司</td>
+                            <td>xxx公司大数据产品申报案例北京东方国信科技股份有限公司</td>
+                            <td>100</td>
+                            <td>100</td>
+                            <td>100</td>
+                            <td>2017/09/09</td>
+                            <td>2017/09/09</td>
+                            <td><span class="preview_file">查看</span></td>
+                        </tr>
+                    </tbody>-->
+               </table>
+               <!--分页-->
+               <div class="page"><span id="paging2"></span></div>
+           </div>
+       </div>
+
+
+    </div>
+
+
+
+
+
+
+

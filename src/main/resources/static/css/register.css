@@ -1,0 +1,200 @@
+.wrap{
+    width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    min-height: calc(100% - 100px);
+    border:20px solid #e5e9ec;
+    border-bottom: none;
+}
+.main{
+    height: 100%
+}
+.container{
+    width:100% !important;
+}
+.main .main-con{
+    background-color:#fff;
+    height: 100%;
+}
+.main .main-con .title{
+    color:#1f1e1e;
+    font-size: 28px;
+    margin-left: 280px;
+    line-height: 70px;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+.pass_box{
+    background: #fff;
+    min-height: 320px;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin: 10px 0 0 30px;
+}
+.box_left{
+    width: 200px;
+    text-align: right;
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: top;
+}
+.box_right{
+    width: 700px;
+    text-align: left;
+    display: inline-block;
+
+}
+.pass_box ul li{
+    line-height: 55px;
+    height: 55px;
+    color: #1f1e1e;
+    font-size: 16px;
+}
+
+.pass_box ul li input{
+    width: 330px;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0 6px;
+    font-size: 15px;
+    border-radius: 4px;
+    outline: none;
+    border: 1px solid #e5e9ec;
+    color:#1f1e1e;
+}
+
+#register_addre{
+    cursor:pointer;
+    width: 330px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 4px;
+    font-size: 15px;
+    border: 1px solid #e5e9ec;
+    background: #fff;
+    outline: none;
+    color:#1f1e1e;
+    box-sizing: border-box;
+    padding: 0 6px 0 4px;
+}
+
+.box_right .box_btn{
+    margin:30px 0 50px 0;
+}
+
+.box_right #user_apply,.box_right .login-con{
+    display:inline-block;
+    box-sizing: border-box;
+    background: #076bce;
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 9px 34px;
+    cursor: pointer;
+    font-size: 18px;
+    outline: none;
+    margin-left:50px;
+}
+
+.box_right .login-con{
+    margin-left:60px;
+    background-color:#5490cc;
+}
+
+.box_right li span{
+    font-size:13px;
+    color:#d40b14;
+    padding-left:10px;
+}
+
+.pass_box ul li.iden_code input{
+    width: 120px;
+    float: left;
+    margin-top: 8px;
+}
+
+.apply_info{
+    color:#d40b14;
+    font-size:13px;
+    line-height:30px;
+    margin-left:223px;
+}
+
+/*modal*/
+.modal{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0px;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 999999999;
+    color: #fff;
+    display: none;
+}
+
+.modal_dialog {
+    width: 440px;
+    height: 250px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -125px;
+    margin-left: -220px;
+    background: #e9e9e9;
+    border-radius: 5px;
+    color: #0a0a0a;
+}
+
+.modal_dialog .top{
+    height:10px;
+    background-color:#076bce;
+    border-radius:5px 5px  0 0;
+}
+.modal_dialog span{
+    position:absolute;
+    top:10px;
+    right:8px;
+    font-size:20px;
+    cursor:pointer;
+}
+.modal_dialog p{
+    padding: 40px 25px;
+    text-align:center;
+    font-size:18px;
+    color:#1f1e1e;
+    line-height:36px;
+}
+.modal_dialog a{
+    display:inline-block;
+    border-radius:5px;
+    width:100px;
+    height:40px;
+    background-color:#076bce;
+    margin:0 170px;
+    color:#fff;
+    line-height:40px;
+    text-align:center;
+    font-size:16px;
+}
+
+
+body,html{
+    width:100%;
+    height:100%;
+}
+.submiting-mask{
+    width:100%;
+    height:100%;
+    position: fixed;
+    display: none;
+    left:0;   
+    top: 0;
+    background:rgba(0,0,0,.4); 
+}
+
+
+
+
+
+

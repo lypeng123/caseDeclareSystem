@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bonc.caseDeclare.mapper.HistoricalCaseMapper">
+	<!--根据年限查询该年所有的申报信息-->
+	<select id="selectDeclareInfoByDeclareTime" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+		SELECT * FROM d_case_screen a
+		WHERE 1=1
+		<if test="upload_time != null and upload_time !=''">
+			AND a.upload_time &gt; #{upload_time}
+			AND a.upload_time &lt; #{next_upload_time}
+		</if>
+		ORDER BY a.file_code,a.upload_time
+		limit #{start},#{end}
+	</select>
+	
+</mapper>

@@ -1,0 +1,38 @@
+.header .nav{
+    display: none !important;
+}
+.modal{
+    width:1200px;
+    margin:0 auto;
+}
+.modal p{
+    width:100%;
+    margin:170px 0 50px 0;
+    font-size:28px;
+    color:#0a0a0a;
+    text-align:center;
+    line-height:40px;
+}
+.modal a{
+    float:right;
+    display:inline-block;
+    background-color:#5490cc;
+    border-radius: 4px;
+    padding: 9px 34px;
+    cursor: pointer;
+    font-size: 18px;
+    outline: none;
+    margin:0 545px;
+    color:#fff;
+}
+
+
+
+
+
+
+
+
+
+
+

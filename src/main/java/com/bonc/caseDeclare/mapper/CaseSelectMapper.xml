@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bonc.caseDeclare.mapper.CaseSelectMapper">
+
+	<!-- 查询筛选案例 初筛 -->
+	<select id="selectCase" resultType="java.util.HashMap">
+		SELECT a.*
+		<!--<if
+			test='audit_state != "0" and audit_state != "-2" and audit_state != "-1"'>
+			,ROUND(d.first_score/d.first_count,2) as "first_score",
+			ROUND(d.second_score/d.second_count,2) as "second_score",
+			ROUND((d.first_score+d.second_score)/(d.first_count+d.second_count),2)
+			as "third_score"
+		</if>-->
+		FROM d_case_screen a
+		<!--<if
+			test='audit_state != "0" and audit_state != "-2" and audit_state != "-1"'>
+			,d_composite_score d
+		</if>-->
+		<!--WHERE 1 = 1
+		AND a.audit_state = #{audit_state}
+		<if test="file_type != null and file_type != ''">
+			AND a.file_type = #{file_type}
+		</if>
+		<if test="area_id != null and area_id != ''">
+			AND a.area_id = #{area_id}
+		</if>
+		<if test="property_id != null and property_id != ''">
+			AND a.property_id = #{property_id}
+		</if>
+		<if test="quoted_state != null and quoted_state != ''">
+			AND a.quoted_state = #{quoted_state}
+		</if>
+		<if test="company_name != null and company_name != ''">
+			AND a.company_name LIKE CONCAT('%',#{company_name},'%')
+		</if>
+		<if test="field_id != null and field_id != ''">
+			AND a.field_id = #{field_id}
+		</if>
+		<if test="business_id != null and business_id != ''">
+			<choose>
+				<when test="business_id = 'other'">
+					AND a.declare_id = b.declare_id
+					AND b.business_describe != null
+				</when>
+				<otherwise>
+					AND a.declare_id = c.declare_id
+					AND c.business_id = #{business_id}
+				</otherwise>
+			</choose>
+		</if>
+		<if
+			test='audit_state != "0" and audit_state != "-2" and audit_state != "-1"'>
+			AND a.screen_id = d.screen_id
+		</if>-->
+		ORDER BY a.file_code,a.upload_time
+		limit #{start},#{end}
+	</select>
+
+
+	<select id="selectCount" resultType="java.lang.Integer">
+		SELECT COUNT(screen_id) FROM (
+		SELECT distinct a.*
+		FROM d_case_screen a
+		) f
+	</select>
+</mapper>

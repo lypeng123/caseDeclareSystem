@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bonc.caseDeclare.mapper.ExpertEvaluationMapper">
+    <select id="getSimpleCaseList" resultType="java.util.HashMap">
+        SELECT
+        a.screen_id 'screenId',
+        a.company_name 'companyName',
+        a.old_file_name 'fileName',
+        DATE_FORMAT(a.upload_time, '%Y-%m-%d') 'uploadTime',
+        a.html_path 'htmlPath',
+        a.file_code 'fileCode',
+        IFNULL(b.review_state,0) 'reviewState'
+        FROM
+        d_case_screen a
+        LEFT JOIN d_expert_score b
+        ON a.screen_id = b.screen_id
+        AND a.audit_state = b.audit_state
+        AND b.user_id = #{userId}
+        WHERE 1 = 1
+        <if test="fileType!=null and fileType!=''">
+            AND a.file_type = #{fileType}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            AND a.audit_state = #{auditState}
+        </if>
+        <if test="area!=null and area!=''">
+            AND a.area_id = #{area}
+        </if>
+        ORDER BY a.file_code
+        <if test="page!=null and pageSize != null">
+            LIMIT #{page},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getSimpleCaseListNum" resultType="long">
+        SELECT
+            COUNT(1)
+        FROM
+        d_case_screen a
+        LEFT JOIN d_expert_score b
+        ON a.screen_id = b.screen_id
+        AND a.audit_state = b.audit_state
+        AND b.user_id = #{userId}
+        WHERE 1 = 1
+        <if test="fileType!=null and fileType!=''">
+            AND a.file_type = #{fileType}
+        </if>
+        <if test="auditState!=null and auditState!=''">
+            AND a.audit_state = #{auditState}
+        </if>
+        <if test="area!=null and area!=''">
+            AND a.area_id = #{area}
+        </if>
+    </select>
+
+    <insert id="insertExportScore">
+        INSERT INTO d_expert_score (
+          expert_id,  screen_id,  user_id,
+          user_name,  first_score,  second_score,
+          thrid_score,  fourth_score,  sum_score,
+          audit_time,  review_state,   audit_state
+        )VALUE(
+          #{expertId},#{screenId},#{userId},
+          #{userName},#{first},#{second},
+          #{third},#{fourth},#{sum},
+          NOW(),#{reviewState},#{auditState}
+        )
+    </insert>
+
+    <insert id="insertExportAverage">
+        INSERT INTO d_expert_average (
+          average_id,  first_score,  second_score,
+          third_score,  fourth_score,  sum_score,
+          COUNT,  screen_id,  audit_state
+        )VALUES(
+          #{avgId},#{first},#{second},
+          #{third},#{fourth},#{sum},
+          #{count},#{screenId},#{auditState}
+        )
+    </insert>
+
+    <select id="getExportAverage" resultType="java.util.HashMap">
+        SELECT
+          average_id,  first_score,  second_score,
+          third_score,  fourth_score,  sum_score,
+          count,  screen_id,  audit_state
+        FROM d_expert_average
+        WHERE screen_id = #{screenId}
+        AND audit_state = #{auditState}
+    </select>
+
+    <update id="updateExportAverage">
+        UPDATE d_expert_average
+        SET first_score = first_score + #{first}
+            , second_score = second_score + #{second}
+            , third_score = third_score + #{third}
+            , fourth_score = fourth_score +  #{fourth}
+            , sum_score = sum_score + #{sum}
+            , count = count + #{count}
+        WHERE screen_id = #{screenId}
+        AND audit_state = #{auditState}
+    </update>
+
+    <insert id="insertCompositeScore">
+        INSERT INTO d_composite_score (
+          score_id,  first_score,  first_count,
+          second_score,  second_count,  screen_id
+        )VALUES(
+          #{scoreId},#{firstSum},#{firstCount},
+          #{secondSum},#{secondCount},#{screenId}
+        )
+    </insert>
+
+    <select id="getCompositeScore" resultType="java.util.HashMap">
+        SELECT
+          score_id,  first_score,  first_count,
+          second_score,  second_count,  screen_id
+        FROM d_composite_score
+        WHERE screen_id = #{screenId}
+    </select>
+
+    <update id="updateCompositeScore">
+        UPDATE d_composite_score
+        SET first_score = first_score + #{firstSum}
+        , first_count = first_count + #{firstCount}
+        , second_score = second_score + #{secondSum}
+        , second_count = second_count + #{secondCount}
+        WHERE screen_id = #{screenId}
+    </update>
+
+    <select id="getExportScoreByUser" resultType="java.util.HashMap">
+        SELECT
+        expert_id 'expertId', user_id 'userId', first_score 'first',
+        second_score 'second', thrid_score 'third', fourth_score 'fourth',
+        sum_score 'sum', audit_state 'auditState' , review_state 'reviewState'
+        FROM d_expert_score
+        WHERE screen_id = #{screenId}
+        AND user_id = #{userId}
+        AND audit_state = #{auditState}
+    </select>
+
+    <update id="updateExportScore">
+        UPDATE
+        d_expert_score
+        SET
+        first_score = #{first},
+        second_score = #{second},
+        thrid_score = #{third},
+        fourth_score = #{fourth},
+        sum_score = #{sum},
+        audit_time = #{auditTime},
+        review_state = #{reviewState}
+        WHERE screen_id = #{screenId}
+        AND user_id = #{userId}
+        AND audit_state = #{auditState}
+    </update>
+</mapper>

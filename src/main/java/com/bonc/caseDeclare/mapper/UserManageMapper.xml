@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bonc.caseDeclare.mapper.UserManageMapper">
+	
+	<!-- 添加用户信息 -->
+	<insert id="insertUser" parameterType="java.util.HashMap" >
+		INSERT INTO d_user_info(
+			user_id,
+			user_name,
+			password,
+			register_time,
+			declare_mail,
+			declare_person,
+			state,
+			area_id,
+<!-- 			recommend, -->
+			declare_phone,
+			ip,
+			credit_code,
+			company_name,
+			company_register_address,
+			responsible_person,
+			type)
+		VALUES(#{user_id},#{user_name},#{password},#{register_time},
+			#{declare_mail},#{declare_person},#{state},#{area_id},
+<!-- 			#{recommend}, -->
+			#{declare_phone},#{ip},#{credit_code},#{company_name},
+			#{company_register_address},#{responsible_person},#{type})
+	</insert>
+	
+	<!-- 查询用户信息 -->
+	<select id="getAllUser" resultType="java.util.Map" parameterType="java.util.HashMap">
+		SELECT * from d_user_info where 1=1 
+		<!--<if test="declare_mail != null and declare_mail != '' ">
+			and declare_mail = #{declare_mail}
+		</if>
+		<if test="(user_name != null and user_name != '') and (password != null and password != '')">
+			and user_name = #{user_name} and password = #{password}
+		</if>
+		<if test="user_id != null and user_id != '' ">
+			and user_id = #{user_id}
+		</if>-->
+		 
+	</select>
+
+	<!-- 查询用户名最大编码+1 -->
+	<select id="selectMaxUserCode" resultType="java.lang.Integer" >
+		SELECT MAX(SUBSTRING(user_name,3))+1 as userName FROM d_user_info
+	</select>
+	
+	<!-- 添加用户名和密码等用户信息 -->
+	<update id="updateUser" parameterType="java.util.HashMap" >
+		UPDATE d_user_info SET 
+			company_name=#{company_name},responsible_person = #{responsible_person},
+			company_register_address=#{company_register_address},
+			area_id = #{area_id},
+			declare_phone=#{declare_phone},credit_code=#{credit_code},
+			recommend = #{recommend},state=#{state}
+		WHERE declare_mail = #{declare_mail}
+	</update>
+	
+	<!-- 获取所有省份 -->
+	<select id="selectAllProvince" resultType="java.util.HashMap" >
+		SELECT * FROM d_area_info
+	</select>
+	
+	<!-- 获取某个用户允许访问的页面 -->
+	<select id="selectAllowUserMenu" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT menu_id,menu_name name,url,class_name className
+		from d_menu WHERE menu_id 
+		in (SELECT menu_id FROM d_menu_role WHERE role_id = #{type})
+	</select>
+
+	<!--根据年限查询该年所有的申报单位账号信息-->
+	<!--SELECT * FROM d_user_info WHERE TYPE='3' AND YEAR(register_time) = '2017'-->
+	<select id="allDeclareCompanyAccount" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT * FROM d_user_info
+		WHERE TYPE='3'
+		<if test="register_time != null and register_time != ''">
+			and YEAR(register_time) = #{register_time}
+		</if>
+		LIMIT #{start},#{end}
+	</select>
+
+	<!--查询所有的用户个数-->
+	<select id="selectCount" resultType="java.lang.Integer">
+		SELECT COUNT(user_id) FROM (
+		SELECT distinct a.*
+		FROM d_user_info a
+		) f
+	</select>
+
+	<!--根据id查询用户信息-->
+	<!--SELECT * FROM d_user_info WHERE user_id='0668b82f-92a8-4765-b01d-fdfa333f3b2a'-->
+	<select id="findUserById" parameterType="java.lang.String" resultType="java.util.HashMap">
+		SELECT * FROM d_user_info WHERE user_id=#{user_id}
+	</select>
+
+	<!--根据id删除用户信息-->
+	<!--DELETE FROM d_user_info WHERE user_id='0eba982e-8661-48d4-983e-f06f6e4a70c7'-->
+	<delete id="deleteUserById" parameterType="java.lang.String">
+		DELETE FROM d_user_info WHERE user_id=#{user_id}
+	</delete>
+
+	<!--根据用户id查询该用户对应的案例列表-->
+	<select id="caseByUserId" parameterType="java.lang.String" resultType="java.util.Map">
+		SELECT * FROM d_case_screen
+		WHERE user_id=#{user_id}
+	</select>
+
+	<!-- 申报信息时获取用户注册信息 -->
+	<select id="getUserInfo" resultType="java.util.HashMap">
+		SELECT
+			company_name,
+			responsible_person,
+			company_register_address,
+			declare_person,
+			declare_phone,
+			declare_mail,
+			credit_code,
+			area_id
+		FROM d_user_info
+		WHERE user_id = #{user_id}
+	</select>
+
+	<!-- 修改申报信息时获取用户注册信息 -->
+	<select id="getUserInfo2" resultType="java.util.HashMap">
+		SELECT
+		a.*,b.*
+		<if test="property_id != null and property_id != ''">
+			,c.property_id
+		</if>
+		FROM d_user_info a,d_declare_info b,d_user_declare_rel f
+		<if test="property_id != null and property_id != ''">
+			,d_declare_property_rel c
+		</if>
+		WHERE a.user_id = f.user_id
+		AND f.declare_id = b.declare_id
+
+		<if test="property_id != null and property_id != ''">
+			AND c.declare_id = b.declare_id
+		</if>
+		AND a.user_id=#{user_id}
+	</select>
+
+	<!-- 获取申报ID -->
+	<select id="declareId" resultType="java.lang.String">
+		SELECT declare_id
+		FROM d_user_declare_rel
+		WHERE user_id = #{user_id}
+	</select>
+</mapper>

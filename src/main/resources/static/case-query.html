@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" class="case-query">
+<head>
+	<meta charset="UTF-8">
+	<title>申报系统</title>
+	<link rel="stylesheet" href="./css/common.css">
+	<link rel="stylesheet" href="./css/case-query.css">
+	<script src="./js/jquery-3.2.1.js"></script>
+	<script src="./js/getPath.js"></script>
+	<script src="./js/common.js"></script>
+	<script src="./js/case-query.js"></script>
+	<script src="./js/jqPaginator.js"></script>
+</head>
+<body>
+	<div class="header"></div>
+	<div class="content">
+		
+	<div class="tab">
+			<ul class="clear">
+				<li class="active" data-url="case-query/initial-case.html" data-audit_state="0">原始案例查询</li>
+				<li data-url="case-query/initial-case.html" data-audit_state="1">第一轮评审结果查询</li>
+				<li data-url="case-query/initial-case.html" data-audit_state="2">第二轮评审结果查询</li>
+				<li data-url="case-query/initial-case.html" data-audit_state="3">最终入选案例查询</li>
+			</ul>
+		</div>
+	<div class="filter">
+		<table>
+			<tr>
+				<td>
+					<label for="">案例分类：
+						<select name="file_type" id="">
+							<option value="">全部</option>
+							<option value="0">大数据产品</option>
+							<option value="1">大数据解决方案</option>
+						</select>
+					</label>
+				</td>
+				<td>
+					<label for="">省份：
+						<select name="area_id" id="">
+							<!-- 全部 -->
+						</select>
+					</label>
+				</td>
+				<td>
+					<label for="">单位性质：
+						<select name="property_id" id="">
+							<!-- 全部 -->
+						</select>
+					</label>
+				</td>
+				<td>
+					<label for="">主要业务：
+						<select name="business_id" id="">
+							<!-- 全部 -->
+						</select>
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="">是否上市：
+						<select name="quoted_state" id="">
+							<option value="">全部</option>
+							<option value="1">是</option>
+							<option value="0">否</option>
+						</select>
+					</label>
+				</td>
+				<td>
+					<label for="">
+						单位：
+						<input name="company_name" type="text" placeholder="包含关键字（可选）">
+					</label>
+				</td>
+				<td style="display: none;">
+					<label for="">
+						应用领域：
+						<select name="field_id" id="">
+							
+						</select>
+					</label>
+				</td>
+				<td><a href="javascript:;" class="submit">确定</button></a>
+			</tr>
+		</table>
+	</div>
+
+	<div class="result">
+		<table>
+			<thead class="result-title">
+			</thead>
+			<tbody class="result-list">
+				
+			</tbody>
+		</table>	
+		<div class="page"><span id="paging"></span></div>
+	</div>
+	
+	</div>
+	
+	<!-- 对话框初始模板 -->
+	<div class="dialog-review">
+		<div class="dialog-header">
+			<div class="dialog-title"></div>
+			<!-- <a href="javascript:;" title="关闭" class="dialog-close">×</a> -->
+			<a href="javascript:;" class="dialog-close">返回</a>
+		</div>
+		<div class="dialog-content">
+		
+				<div class="left-content">
+					<iframe src="" id="case-preview" frameborder="0"></iframe>	
+				</div>
+
+				<div class="right-content">
+					
+					<h2></h2>
+					<table></table>	
+		
+				</div>
+	
+		</div>
+			
+	</div>
+	<script>
+
+    	$('#iframe-page').on('load',function() {
+
+        $(this).css('height','initial');
+        
+        var iframe = this;
+        var star = new Date();
+        var timer = setInterval(setIframeHeight);
+        
+        function setIframeHeight() {
+            var height;
+            var body = iframe.contentWindow.document.body;
+            if(body == null){
+            	return;
+            }
+            if(new Date() - star < 5000 && $(body).length != 0 ){
+                height = body.scrollHeight + 'px' ; 
+                $(iframe).css("height",height);
+                $(iframe).parent().css("height",height);
+
+            }else{
+                clearInterval(timer)
+            }
+        }
+    })
+	</script>
+	
+</body>
+</html>

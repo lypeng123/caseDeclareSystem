@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bonc.caseDeclare.mapper.DeclareInfoMapper">
+
+	<!-- 申报信息时获取用户注册信息 -->
+	<select id="getProperty" resultType="java.util.HashMap">
+		SELECT property_id,property_name
+		FROM d_company_property
+		ORDER BY property_id
+	</select>
+	
+	<!-- 申报信息时获取用户注册信息 -->
+	<select id="getbusiness" resultType="java.util.HashMap">
+		SELECT business_id,business_name
+		FROM d_main_business
+		ORDER BY business_id	
+	</select>
+	
+	<!-- 申报信息时获取用户注册信息 -->
+	<select id="getHonor" resultType="java.util.HashMap">
+		SELECT honor_id,honor_name
+		FROM d_honor
+		ORDER BY honor_id
+	</select>
+	
+	<!-- 获取申报ID -->
+	<select id="declareId" resultType="java.lang.String">
+		SELECT declare_id 
+		FROM d_user_declare_rel
+		WHERE user_id = #{user_id}
+	</select>
+
+	<!-- 申报信息时获取用户注册信息 -->
+	<select id="getUserInfo" resultType="java.util.HashMap">
+		SELECT
+			company_name,
+			responsible_person,
+			company_register_address,
+			declare_person,
+			declare_phone,
+			declare_mail,
+			credit_code,
+			area_id
+		FROM d_user_info
+		WHERE user_id = #{user_id}
+	</select>
+	
+	<!-- 获取性质ID -->
+	<select id="selectPropertyId" resultType="java.lang.String">
+		SELECT property_id FROM d_declare_property_rel WHERE declare_id = #{declare_id}
+	</select>
+	
+	<!-- 修改申报信息时获取用户注册信息 -->
+	<select id="getUserInfo2" resultType="java.util.HashMap">
+		SELECT
+			a.*,b.*
+		<if test="property_id != null and property_id != ''">
+			,c.property_id
+		</if>	
+		FROM d_user_info a,d_declare_info b,d_user_declare_rel f
+		<if test="property_id != null and property_id != ''">
+			,d_declare_property_rel c
+		</if>
+		WHERE a.user_id = f.user_id
+		AND f.declare_id = b.declare_id
+		
+		<if test="property_id != null and property_id != ''">
+			AND c.declare_id = b.declare_id
+		</if>
+		AND a.user_id=#{user_id}
+	</select>
+	
+	<!-- 获取关联的主营业务数据 -->
+	<select id="getbusinessInfo" resultType="java.util.HashMap">
+		SELECT business_id 
+		FROM d_declare_business_rel 
+		WHERE declare_id = #{declare_id}
+	</select>
+	
+	<!-- 获取关联的荣誉数据 -->
+	<select id="getHonorInfo" resultType="java.util.HashMap">
+		SELECT honor_id,honor_level,get_year 
+		FROM d_declare_honor_rel
+		WHERE declare_id = #{declare_id}
+	</select>
+	
+	<!-- 用户信息表数据修改 -->
+	<update id="updateUserInfo" parameterType="java.util.HashMap">
+		UPDATE d_user_info SET
+			company_name = #{company_name},
+			responsible_person = #{responsible_person},
+			responsible_phone = #{responsible_phone},
+			responsible_mail = #{responsible_mail},
+			corporate_jurisdical_person = #{corporate_jurisdical_person},
+			company_office_address = #{company_office_address},
+			company_register_address = #{company_register_address},
+			declare_person = #{declare_person},
+			declare_phone = #{declare_phone},
+			declare_mail = #{declare_mail},
+			register_capital = #{register_capital}
+		WHERE user_id = #{user_id}	
+	</update>
+	
+	<!-- 申报信息表数据添加 -->
+	<insert id="insertDeclareInfo" parameterType="java.util.HashMap">
+		INSERT INTO d_declare_info (
+		  declare_id,
+		  declare_time,
+		  property_describe,
+		  business_describe,
+		  quoted_state,
+		  quoted_time,
+		  quoted_address,
+		  shares_code,
+		  export_state,
+		  export_address,
+		  honor_describe,
+		  development_ability,
+		  business_income,
+		  development_investment,
+		  tax_nums,
+		  profit,
+		  company_person_nums,
+		  development_person_nums,
+		  product_incom,
+		  information_income,
+		  software_income,
+		  data_income
+		) 
+		VALUES
+		  (
+		    #{declare_id},
+		    NOW(),
+		    #{property_describe},
+		    #{business_describe},
+		    #{quoted_state},
+		    #{quoted_time},
+		    #{quoted_address},
+		    #{shares_code},
+		    #{export_state},
+		    #{export_address},
+		    #{honor_describe},
+		    #{development_ability},
+		    #{business_income},
+		    #{development_investment},
+		    #{tax_nums},
+		    #{profit},
+		    #{company_person_nums},
+		    #{development_person_nums},
+		    #{product_incom},
+		    #{information_income},
+		    #{software_income},
+		    #{data_income}
+		  )
+	</insert>
+
+	<!-- 用户_申报关系表数据添加 -->
+	<insert id="insertUserDeclareRel" parameterType="java.lang.String">
+		INSERT INTO d_user_declare_rel(user_id,declare_id)
+		VALUES(#{user_id},#{declare_id})
+	</insert>
+	
+	<!-- 申报_单位性质关系表数据添加 -->
+	<insert id="insertDeclarePropertyRel" parameterType="java.lang.String">
+		INSERT INTO d_declare_property_rel(declare_id,property_id)
+		VALUES(#{declare_id},#{property_id})
+	</insert>
+	
+	<!-- 申报_主营业务关系表数据添加 -->
+	<insert id="insertDeclareBusinessRel" parameterType="java.lang.String">
+		INSERT INTO d_declare_business_rel(declare_id,business_id)
+		VALUES(#{declare_id},#{business_id})
+	</insert>
+	
+	<!-- 申报_相关荣誉关系表数据添加 -->
+	<insert id="insertDeclareHonorRel" parameterType="java.lang.String">
+		INSERT INTO d_declare_honor_rel(declare_id,honor_id,honor_level,get_year)
+		VALUES(#{declare_id},#{honor_id},#{honor_level},#{get_year})
+	</insert>
+	
+	
+	<!-- 申报信息表数据修改-->
+	<insert id="updateDeclareInfo" parameterType="java.util.HashMap">
+		UPDATE d_declare_info SET
+		  declare_time = NOW(),
+		  property_describe = #{property_describe},
+		  business_describe = #{business_describe},
+		  quoted_state = #{quoted_state},
+		  quoted_time = #{quoted_time},
+		  quoted_address = #{quoted_address},
+		  shares_code = #{shares_code},
+		  export_state = #{export_state},
+		  export_address = #{export_address},
+		  honor_describe = #{honor_describe},
+		  development_ability = #{development_ability},
+		  business_income = #{business_income},
+		  development_investment = #{development_investment},
+		  tax_nums = #{tax_nums},
+		  profit = #{profit},
+		  company_person_nums = #{company_person_nums},
+		  development_person_nums = #{development_person_nums},
+		  product_incom = #{product_incom},
+		  information_income = #{information_income},
+		  software_income = #{software_income},
+		  data_income = #{data_income}
+		WHERE declare_id = #{declare_id} 
+	</insert>
+
+	<!-- 申报_单位性质关系表数据修改 -->
+	<insert id="updateDeclarePropertyRel" parameterType="java.lang.String">
+		UPDATE d_declare_property_rel SET property_id = #{property_id}
+		WHERE declare_id = #{declare_id}
+	</insert>
+	
+	<!-- 删除关于主营业务的选择 -->
+	<delete id="deletebusiness" parameterType="java.lang.String">
+		delete from d_declare_business_rel
+		where declare_id = #{declare_id}
+	</delete>
+	
+	<!-- 删除关于荣誉的选择 -->
+	<insert id="deleteHonor" parameterType="java.lang.String">
+		delete from d_declare_honor_rel
+		where declare_id = #{declare_id}
+	</insert>
+	
+	<!-- 删除关于性质的选择 -->
+	<insert id="deleteProperty" parameterType="java.lang.String">
+		delete from d_declare_property_rel
+		where declare_id = #{declare_id}
+	</insert>
+
+	<!--根据年限查询该年所有的申报信息-->
+	<select id="selectDeclareInfoByDeclareTime" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+		SELECT * FROM d_declare_info
+	</select>
+
+</mapper>

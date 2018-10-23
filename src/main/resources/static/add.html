@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/jquery-3.2.1.js"></script>
+</head>
+<body>
+	注册个数：<input type="text" id="input" value="1">
+	<button id="btn" onclick="add()">疯狂注册吧！</button>
+	<script>
+
+	function add() {
+		var count = parseInt(input.value);
+		for(var i = 0 ;i < count ;i++){
+		setTimeout(function() {
+
+				var ajaxData = {
+					"company_name":"s",
+					"responsible_person":"s",
+					"company_register_address":"s",
+					"declare_person":"s",
+					"declare_phone":"15555555552",
+					"declare_mail": Date.now() + "@qq.com",
+					"credit_code":"11111111111111111s",
+					"password":"123456ma",
+					"area_id":"001"
+				};
+				$.ajax({
+                type: 'post',
+                url: "http://san.511860.com/casedeclare_system_test/login/regist",
+                data: ajaxData,
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (data) {
+
+                    if (data.state == 1) {
+                        console.log('注册成功',data.message,ajaxData.declare_mail);
+                    }else{
+                    	console.log('注册失败',data.message)
+                    }
+                }
+            });
+		},100 * Math.random()*10 + 1);
+		
+
+		
+		};
+
+		
+	}
+
+	
+		
+	</script>
+</body>
+</html>

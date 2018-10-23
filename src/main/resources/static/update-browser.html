@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			color: white;
+			text-decoration: none;
+			list-style-type: none;
+		}
+
+		body,
+		html {
+			width: 100%;
+			height: 100%;
+		}
+
+		.clear {
+			clear: both;
+		}
+
+		.wrap {
+			width: 100%;
+			height: 100%;
+			background-image: url(./images/browser.png);
+			background-color: #3c8ddf;
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-size: 100% 100%;
+			position: fixed;
+			left: 0;
+			top: 0;
+		}
+
+		.header {
+			width: 100%;
+			height: 100px;
+			line-height: 100px;
+			text-align: center;
+			background: #1267bb;
+			margin-top: 90px;
+			font-size: 37px;
+			letter-spacing: 3px;
+		}
+
+		.tip {
+			width: 900px;
+			font-size: 18px;
+			text-align: center;
+			margin: 80px auto;
+			line-height: 2em;
+			letter-spacing: 2px;
+		}
+
+		.browser {
+			width: 900px;
+			margin: 0 auto;
+		}
+
+		.browser ul li {
+			width: 300px;
+			float: left;
+			text-align: center;
+			cursor: pointer;
+			padding-top: 20px;
+		}
+		.browser ul li:hover{
+			background:#086bcf;
+		}
+		.browser ul li img {
+			width: 140px;
+			display: block;
+			margin: 0 auto;
+		}
+
+		.browser ul li a {
+			display: block;
+			width: 100%;
+			margin: 20px auto;
+			text-align: center;
+			font-weight: bold;
+		}
+
+		.browser ul li:hover a {
+			color: yellow;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="wrap">
+		<div class="header">
+			工业和信息化部2017大数据优秀产品和应用解决方案案例申报系统
+		</div>
+		<div class="tip">
+			抱歉，您使用的浏览器版本过低，可能存在安全风险，强烈建议您升级成以下浏览器再试！
+			<br> （点击下载&nbsp;↓）
+		</div>
+
+		<div class="browser">
+			<ul>
+				<li class="chrome" title="下载谷歌">
+					<img src="./images/chrome.png" alt="">
+					<a>谷歌（Chrome）</a>
+				</li>
+				<li class="firefox" title="下载火狐">
+					<img src="./images/firefox.png" alt="">
+					<a>火狐（Firefox）</a>
+				</li>
+				<li class="safari" title="下载苹果">
+					<img src="./images/safari.png" alt="">
+					<a>苹果（Safari）</a>
+				</li>
+				<div class="clear"></div>
+			</ul>
+		</div>
+
+	</div>
+	<script>
+		window.onload = function () {
+			var lis = document.getElementsByTagName('li');
+			for (var i = 0; i < lis.length; i++) {
+				lis[i].onclick = function(){
+					window.location.href = 'http://rj.baidu.com/search/index/?kw=' + this.className ;
+				}
+			}
+		}
+	</script>
+</body>
+
+</html>

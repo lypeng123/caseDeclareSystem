@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" class="login">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1" />
+    <title>登录</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="fonts/iconfont.css">
+    <script>
+        try {
+            var userAgent = navigator.userAgent;
+            if (userAgent.indexOf("Firefox") > -1 || //火狐
+                userAgent.indexOf("Chrome") > -1 || //谷歌
+                userAgent.indexOf("Safari") > -1 || //苹果
+                userAgent.indexOf("Edge") > -1 || //edge
+                (userAgent.indexOf("rv:11") > -1 && userAgent.indexOf("Trident/7.0") > -1) || //ie11
+                (userAgent.match(/MSIE\s*(\d+)/i) && userAgent.match(/MSIE\s*(\d+)/i)[1] >= 10)) { //大于ie10
+
+            } else { //不在白名单
+                window.location.href = "./update-browser.html";
+            }
+            document.documentElement.style.fontSize = document.documentElement.clientWidth / 19.2 + 'px';
+        } catch (err) {
+            window.location.href = "./update-browser.html";
+        }
+    </script>
+    <script src="./js/jquery-3.2.1.js"></script>
+    <script src="js/getPath.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="js/login.js"></script>
+</head>
+
+<body>
+
+    <div class="wrap">
+        <div class="wrap-con">
+            <div class="header">
+                <p class="title">工业和信息化部2017大数据优秀产品和应用解决方案案例申报系统</p>
+            </div>
+            <div class="main">
+                <div class="login-left">
+                    <img src="images/login-l.png" alt="">
+                </div>
+                <div class="login-right">
+                    <div class="right-con"></div>
+                    <div class="user_name">
+                        <span>
+                            <img src="images/user.png" alt="">
+                        </span>
+                        <input id="user_name" type="text" placeholder="用户名（邮箱）" />
+                        <p class="info"></p>
+                    </div>
+                    <div class="user_password">
+                        <span>
+                            <img src="images/password.png" alt="">
+                        </span>
+                        <input id="user_password" type="password" placeholder="密码" />
+                        <p class="info"></p>
+                        <div class="show-password iconfont icon-yanjing" title="按住显示密码"></div>
+                    </div>
+                    <div class="login">
+                        <a onclick="login_end()">注册</a>
+                        <a href="#" id="login_btn">登录</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                主办单位：国家工业信息安全发展研究中心&nbsp;&nbsp;填报咨询电话：010-88686171、010-88687355&nbsp;&nbsp;申报交流QQ群：651474192&nbsp;&nbsp;技术支持：010-84866774
+            </div>
+        </div>
+        <script>
+            function login_end() {
+
+                new Dialog().init({
+                    mask: true,
+                    title: '',
+                    content: '申报已截止，仅限老用户登录查看！',
+                    isAlert: true,
+                    hideView: true,
+                    callback: function (boolean) {
+                        
+                    }
+                });
+            }
+        </script>
+        <!--  <span class="warn animated fadeInDown">
+            敬告：系统将于2017年11月3日17：00至11月5日23：00（周六、周日）进行维护，维护期间暂时无法登录系统，谢谢合作！
+        </span> -->
+    </div>
+
+</body>
+
+</html>

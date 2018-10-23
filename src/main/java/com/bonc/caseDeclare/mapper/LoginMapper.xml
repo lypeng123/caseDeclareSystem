@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bonc.caseDeclare.mapper.LoginMapper">
+	
+	<!-- 添加用户信息 -->
+	<insert id="insertUser" parameterType="java.util.HashMap" >
+		INSERT INTO d_user_info(
+			user_id,
+			user_name,
+			password,
+			register_time,
+			declare_mail,
+			declare_person,
+			state,
+			area_id,
+<!-- 			recommend, -->
+			declare_phone,
+			ip,
+			credit_code,
+			company_name,
+			company_register_address,
+			responsible_person,
+			type)
+		VALUES(#{user_id},#{user_name},#{password},#{register_time},
+			#{declare_mail},#{declare_person},#{state},#{area_id},
+<!-- 			#{recommend}, -->
+			#{declare_phone},#{ip},#{credit_code},#{company_name},
+			#{company_register_address},#{responsible_person},#{type})
+	</insert>
+	
+	<!-- 查询用户信息 -->
+	<select id="selectUser" resultType="java.util.Map" parameterType="java.util.HashMap">
+		SELECT * from d_user_info where 1=1 
+		<if test="declare_mail != null and declare_mail != '' ">
+			and declare_mail = #{declare_mail}
+		</if>
+		<if test="(user_name != null and user_name != '') and (password != null and password != '')">
+			and user_name = #{user_name} and password = #{password}
+		</if>
+		<if test="user_id != null and user_id != '' ">
+			and user_id = #{user_id}
+		</if>
+		 
+	</select>
+
+	<!-- 查询用户名最大编码+1 -->
+	<select id="selectMaxUserCode" resultType="java.lang.Integer" >
+		SELECT MAX(SUBSTRING(user_name,3))+1 as userName FROM d_user_info
+	</select>
+	
+	<!-- 添加用户名和密码等用户信息 -->
+	<update id="updateUser" parameterType="java.util.HashMap" >
+		UPDATE d_user_info SET 
+			company_name=#{company_name},responsible_person = #{responsible_person},
+			company_register_address=#{company_register_address},
+			area_id = #{area_id},
+			declare_phone=#{declare_phone},credit_code=#{credit_code},
+			recommend = #{recommend},state=#{state}
+		WHERE declare_mail = #{declare_mail}
+	</update>
+	
+	<!-- 获取所有省份 -->
+	<select id="selectAllProvince" resultType="java.util.HashMap" >
+		SELECT * FROM d_area_info
+	</select>
+	
+	<!-- 获取某个用户允许访问的页面 -->
+	<select id="selectAllowUserMenu" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT menu_id,menu_name name,url,class_name className
+		from d_menu WHERE menu_id 
+		in (SELECT menu_id FROM d_menu_role WHERE role_id = #{type})
+	</select>
+	
+</mapper>

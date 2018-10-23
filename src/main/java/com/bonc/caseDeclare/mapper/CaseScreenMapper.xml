@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bonc.caseDeclare.mapper.CaseScreenMapper">
+
+	<!-- 案例筛选数据列表 -->
+	<select id="selectCasePrescreenResult" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		
+		SELECT d.*
+		<if test='audit_state != "0"'>
+			,c.*
+		</if>
+		FROM 
+			d_case_screen d
+		<if test='audit_state != "0"'>
+			LEFT JOIN d_composite_score c
+		</if>
+		<if test='audit_state != "0"'>
+			on d.screen_id = c.screen_id
+		</if>
+		WHERE d.audit_state = #{audit_state}
+		
+		<if test='file_type == "0" or file_type == "1"'>
+			and file_type = #{file_type}
+		</if>
+		<if test="area_id != null and area_id != ''">
+			and area_id = #{area_id}
+		</if>
+		<if test="average != null and average != ''">
+			and (c.first_score+c.second_score)/2 >= #{average}
+		</if>
+		<if test="first_score != null and first_score != ''">
+			and first_score >= #{first_score}
+		</if>
+		LIMIT #{start},#{end}
+	</select>
+
+	<!-- 案例筛选复审结果 -->
+	<select id="selectCaseRetrialResult" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		SELECT d.*,c.* FROM 
+			d_case_screen d JOIN d_composite_score c
+		ON d.screen_id = c.screen_id
+		WHERE d.audit_state = "1"
+		<if test='file_type == "0" or file_type == "1"'>
+			and file_type = #{file_type}
+		</if>
+		<if test="area_id != null and area_id != ''">
+			and area_id = #{area_id}
+		</if>
+		<if test="first_score != null and first_score != ''">
+			and first_score >= #{first_score}
+		</if>
+		LIMIT #{start},#{end}
+	</select>
+	
+	<!-- 案例筛选终选或入选名单 -->
+	<!-- <select id="selectCaseFinalResult" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		SELECT d.*,c.* FROM 
+			d_case_screen d JOIN d_composite_score c
+		ON d.screen_id = c.screen_id
+		WHERE d.audit_state = #{audit_state}
+		<if test='file_type == "0" or file_type == "1"'>
+			and file_type = #{file_type}
+		</if>
+		<if test="area_id != null and area_id != ''">
+			and area_id = #{area_id}
+		</if>
+		<if test="average != null and average != ''">
+			and (c.first_score+c.second_score)/2 >= #{average}
+		</if>
+		LIMIT #{start},#{end}
+		
+	</select> -->
+	
+	<!-- 根据筛选条件查询数据总条数 -->
+	<select id="selectDataCount" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		SELECT count(*)
+		FROM 
+			d_case_screen d
+		<if test='audit_state != "0"'>
+			LEFT JOIN d_composite_score c
+		</if>
+		<if test='audit_state != "0"'>
+			on d.screen_id = c.screen_id
+		</if>
+		WHERE d.audit_state = #{audit_state}
+		
+		<if test='file_type == "0" or file_type == "1"'>
+			and file_type = #{file_type}
+		</if>
+		<if test="area_id != null and area_id != ''">
+			and area_id = #{area_id}
+		</if>
+		<if test="average != null and average != ''">
+			and (c.first_score+c.second_score)/2 >= #{average}
+		</if>
+		<if test="first_score != null and first_score != ''">
+			and first_score >= #{first_score}
+		</if>
+		<!-- LIMIT #{start},#{end} -->
+	</select>
+	
+	<!-- 对案例进行筛选 -->
+	<update id="updateCaseState" parameterType="java.util.HashMap" >
+		UPDATE d_case_screen SET audit_state = #{audit_state} WHERE file_code = #{file_code}
+	</update>
+	
+</mapper>

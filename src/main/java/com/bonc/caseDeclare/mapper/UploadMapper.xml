@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bonc.caseDeclare.mapper.UploadMapper">
+
+	<!-- 添加上传产品文件信息 -->
+	<insert id="insertUploadProductInfo" parameterType="java.util.HashMap">
+		INSERT INTO d_product_upload(
+		declare_id,
+		product_id,
+		old_file_name,
+		file_name,
+		file_path,
+		html_path,
+		upload_time,
+		state
+		)
+		VALUES(#{declare_id},#{product_id},#{old_file_name},#{file_name},
+		#{file_path},#{html_path},#{upload_time},#{state})
+	</insert>
+
+	<!-- 添加上传方案文件信息 -->
+	<insert id="insertUploadPlanInfo" parameterType="java.util.HashMap">
+		INSERT INTO d_plan_upload(
+		declare_id,
+		plan_id,
+		old_file_name,
+		file_name,
+		file_path,
+		html_path,
+		field_id,
+		upload_time,
+		state
+		)
+		VALUES(#{declare_id},#{plan_id},#{old_file_name},#{file_name},
+		#{file_path},#{html_path},#{field_id},#{upload_time},#{state})
+	</insert>
+
+	<!-- 查询上传产品文件 -->
+	<select id="selectProductFile" resultType="java.util.HashMap">
+		SELECT
+		product_id,file_name,old_file_name,file_path,html_path,upload_time
+		FROM d_product_upload
+		WHERE declare_id = #{declare_id}
+		AND state = '1'
+	</select>
+
+	<!-- 查询上传方案文件 -->
+	<select id="selectPlanFile" resultType="java.util.HashMap">
+		SELECT
+		plan_id,file_name,old_file_name,file_path,field_id,html_path,upload_time
+		FROM d_plan_upload
+		WHERE declare_id = #{declare_id}
+		AND state = '1'
+	</select>
+
+	<!-- 查询领域数据 -->
+	<select id="selectField" resultType="java.util.HashMap">
+		SELECT * FROM
+		d_industry_field
+		ORDER BY field_id
+	</select>
+
+	<!-- 删除上传产品文件(真删) -->
+	<delete id="deleteProductWord" parameterType="java.lang.String">
+		DELETE FROM
+		d_product_upload WHERE product_id = #{product_id}
+	</delete>
+
+	<!-- 删除上传方案文件(真删) -->
+	<delete id="deletePlanWord" parameterType="java.lang.String">
+		DELETE FROM
+		d_plan_upload WHERE plan_id = #{plan_id}
+	</delete>
+
+	<!-- 删除筛选表里的数据 -->
+	<delete id="deleteScreenTable" parameterType="java.util.HashMap">
+		DELETE FROM
+		d_case_screen WHERE company_name = #{company_name} and file_name =
+		#{file_name} and (audit_state = '0' or audit_state = '-2')
+	</delete>
+
+	<!-- 查询文件号最大编码+1 -->
+	<select id="selectMaxFileCode" resultType="java.lang.Integer">
+		SELECT IFNULL(MAX(SUBSTRING(file_code,3))+1,1000) AS CODE FROM
+		d_case_screen
+	</select>
+
+	<!-- 将上传数据插入筛选表 -->
+	<insert id="insertScreenTable" parameterType="java.util.HashMap">
+		INSERT INTO
+		d_case_screen (
+		screen_id,
+		file_code,
+		company_name,
+		declare_id,
+		property_id,
+		user_id,
+		user_name,
+		area_id,
+		quoted_state,
+		file_type,
+		old_file_name,
+		file_name,
+		file_path,
+		html_path,
+		field_id,
+		upload_time,
+		selected_time,
+		audit_state,
+		selected_state
+		)
+		VALUES
+		(#{screen_id},
+		#{file_code},
+		#{company_name},
+		#{declare_id},
+		#{property_id},
+		#{user_id},
+		#{user_name},
+		#{area_id},
+		#{quoted_state},
+		#{file_type},
+		#{old_file_name},
+		#{file_name},
+		#{file_path},
+		#{html_path},
+		#{field_id},
+		#{upload_time},
+		NOW(),
+		#{audit_state},
+		#{selected_state})
+	</insert>
+
+	<!-- 删除产品文件(假删) -->
+	<update id="updateDeleteProductWord" parameterType="java.lang.String">
+		UPDATE
+		d_product_upload SET state = '0' WHERE product_id = #{product_id}
+	</update>
+
+	<!-- 删除方案文件(假删) -->
+	<update id="updateDeletePlanWord" parameterType="java.lang.String">
+		UPDATE
+		d_plan_upload SET state = '0' WHERE plan_id = #{plan_id}
+	</update>
+
+	<!-- 检查是否存在审核中的案例 -->
+	<select id="checkState" resultType="java.util.HashMap">
+		SELECT * 
+		FROM d_case_screen
+		WHERE declare_id = #{declare_id}
+		AND audit_state != '-2' 
+		AND audit_state != '0'
+		
+	</select>
+
+</mapper>

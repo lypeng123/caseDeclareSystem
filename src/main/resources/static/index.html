@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" class="case-declare">
+<head>
+	<meta charset="UTF-8">
+	<title>申报系统</title>
+	<link rel="stylesheet" href="./css/common.css">
+	<link rel="stylesheet" href="./css/fillinfo.css">
+	<script src="./js/jquery-3.2.1.js"></script>
+	<script src="./js/getPath.js"></script>
+	<script src="./js/common.js"></script>
+	<script src="./laydate/laydate.js"></script>
+</head>
+<body>
+	<div class="header"></div>
+	<div class="content">
+		<div class="overall-process"></div>
+		<p class="current-process">申报单位信息完善</p> 
+		<p class="must-remind">注意：带红色<span>*</span>号的为必填项</p>
+		<form method="post" action="" id="declare-form">
+		<table>
+			<tr class="tr1">
+				<td><span class="must">*</span>单位名称</td>
+				<td colspan="30"><input name="company_name" type="text"></td>
+			</tr>
+
+			<tr class="tr2">
+				<td>单位负责人</td>
+				<td colspan="5"><span class="must">*</span>姓名</td>
+				<td colspan="5"><input name="responsible_person" type="text"></td>
+				<td colspan="5"><span class="must">*</span>电话</td>
+				<td colspan="5"><input name="responsible_phone" type="text"></td>
+				<td colspan="5"><span class="must">*</span>邮箱</td>
+				<td colspan="5"><input name="responsible_mail" type="text"></td>
+			</tr>
+			
+			<tr class="tr3">
+				<td>申报联系人</td>
+				<td colspan="5"><span class="must">*</span>姓名</td>
+				<td colspan="5"><input name="declare_person" type="text"></td>
+				<td colspan="5"><span class="must">*</span>电话</td>
+				<td colspan="5"><input name="declare_phone" type="text"></td>
+				<td colspan="5"><span class="must">*</span>邮箱</td>
+				<td colspan="5"><input name="declare_mail" type="text"></td>
+			</tr>
+			
+			<tr class="tr4">
+				<td><span class="must">*</span>注册资本</td>
+				<td colspan="10"class="min-input"><input  name="register_capital" type="text">万元</td>
+				<td colspan="10"><span class="must">*</span>法定代表人</td>
+				<td colspan="10"><input name="corporate_jurisdical_person" type="text"></td>
+			</tr>
+			
+			<tr class="tr5">
+				<td><span class="must">*</span>单位注册地址</td>
+				<td colspan="30"><input name="company_register_address" type="text"></td>
+			</tr>
+			<tr class="tr6">
+				<td><span class="must">*</span>单位办公地址</td>
+				<td colspan="30"><input name="company_office_address" type="text"></td>
+			</tr>
+			<tr class="tr7">
+				<td><span class="must">*</span>统一社会信用代码</td>
+				<td colspan="30"><input name="credit_code" type="text"></td>
+			</tr>
+			<tr class="tr8">
+				<td><span class="must">*</span>单位性质</td>
+				<td colspan="30" class="property-box">
+					 
+				</td>
+			</tr>
+			<tr class="tr9">
+				<td><span class="must">*</span>主营业务</td>
+				<td colspan="30" class="business-box">
+					 
+				</td>
+			</tr>
+			<tr class="quoted tr10">
+				<td><span class="must">*</span>是否上市公司</td>
+				<td colspan="30" class="quoted-box">
+					<li><label><input name="quoted_state" type="radio" value="0">否</label></li>
+					<li><label><input name="quoted_state" type="radio" value="1">是</label></li>
+					<li><span>上市时间：</span><input name="quoted_time"  type="text" id="quoted_time" readonly="readonly" /></li>
+					<li><span>上市地点：</span><input name="quoted_address" type="text"></li>
+					<li><span>股票代码：</span><input name="shares_code" type="text"></li>
+				</td>
+			</tr>
+			<tr class="export tr11">
+				<td><span class="must">*</span>是否有业务出口</td>
+				<td colspan="30" class="export-box">
+					<li><label><input name="export_state" type="radio" value="0">否</label></li>
+					<li><label><input name="export_state" type="radio" value="1">是</label></li>
+					<li><span>主要出口地点：</span><input name="export_address" type="text"></li>
+				</td>
+			</tr>
+			<tr class="honer tr12">
+				
+				<td>相关荣誉<br><span class="prove">（需在申报书中提供证明材料）</span></td>
+				<td colspan="30" class="honor-box">
+					
+					<li data-honor_id="1">
+						<span>高新技术企业</span>
+						<span data-honor_level="1">国家级：<input placeholder="（选填）" class="nomust" name="get_year" type="text">年（授予）</span>
+						<span  data-honor_level="2">省市级：<input placeholder="（选填）" class="nomust" name="get_year" type="text">年（授予）</span>
+					</li>
+					<li data-honor_id="2">
+						<span>企业技术中心</span>
+						<span data-honor_level="1">国家级：<input placeholder="（选填）" class="nomust" name="get_year" type="text">年（授予）</span>
+						<span data-honor_level="2">省市级：<input placeholder="（选填）" class="nomust" name="get_year" type="text">年（授予）</span>
+					</li>
+					<li data-honor_id="3">
+						<span>重点实验室</span>
+						<span data-honor_level="1">国家级：<input placeholder="（选填）" class="nomust" name="get_year" type="text">年（授予）</span>
+						<span data-honor_level="2">省市级：<input placeholder="（选填）" class="nomust" name="get_year" type="text">年（授予）</span>
+					</li>
+					<li>其他市级以上荣誉自行添加：<input placeholder="（选填）" class="nomust" name="honor_describe" type="text"></li>
+				</td>
+			</tr>
+			<tr class="development_ability tr13">
+				<td>研发能力<br><span class="prove">（需在申报书中提供证明材料）</span></td>
+				<td colspan="30">
+				<textarea name="development_ability" placeholder="（选填）" class="nomust"></textarea> 
+				</td>
+			</tr>
+
+			<tr class="tr14">
+				<td><span class="must">*</span>2016年主营业务收入<br><span class="prove">（需在申报书中提供证明材料）</span></td>
+
+				<td colspan="6" class="min-input">
+					<input name="business_income"   type="text">万元
+				</td>
+				<!-- <td colspan="6" class="min-input"> -->
+				<td colspan="6" class="min-input" style="white-space:nowrap;">
+					<span class="must">*</span>2016年研发投入<br><span class="prove">（需在申报书中提供证明材料）</span>
+				</td>
+				<td colspan="6" class="min-input">
+					<input name="development_investment"   type="text">万元
+				</td>
+			
+				<td colspan="6" class="min-input bg">
+					<span class="must">*</span>2016年大数据业务收入
+				</td>
+				<td colspan="6" class="min-input">
+					<input name="data_income"   type="text">万元
+				</td>
+			</tr>
+			
+			<tr class="tr15">
+				<td><span class="must">*</span>2016年税金总额</td>
+				<td colspan="10" class="min-input">
+					<input name="tax_nums" type="text"  >万元
+				</td>
+				<td colspan="10"><span class="must">*</span>2016年净利润</td>
+				<td colspan="10" class="min-input">
+					<input name="profit" type="text" >万元
+				</td>
+			</tr>
+			
+			<tr class="tr16">
+				<td><span class="must">*</span>单位总人数</td>
+				<td colspan="10" class="min-input">
+					<input name="company_person_nums" type="text">名
+				</td>
+				<td colspan="10"><span class="must">*</span>研发人员规模</td>
+				<td colspan="10" class="min-input">
+					<input name="development_person_nums" type="text">名
+				</td>
+			</tr>
+			<tr class="tr17">
+				<td>2016年软件业务收入<br><span class="prove">（软件企业必填）</span></td>
+				<td colspan="5">产品收入总额</td>
+				<td colspan="5" class="min-input">
+					<input class="nomust" placeholder="（选填）" name="product_incom" type="text"  >万元
+				</td>
+				<td colspan="5">信息技术服务收入总额</td>
+				<td colspan="5" class="min-input">
+					<input class="nomust" placeholder="（选填）" name="information_income" type="text"  >万元
+				</td>
+				<td colspan="5">嵌入式系统软件收入总额</td>
+				<td colspan="5" class="min-input">
+					<input class="nomust" placeholder="（选填）" name="software_income" type="text"  >万元
+				</td>
+			</tr>
+		</table>
+
+		</form>
+		
+		<p class="save"><button>保存</button></p>
+	
+		<div class="word">
+			<ul class="down-list">
+				<li><b>申报书：（下载并填写）</b></li>
+				<li><a class="project-download-link" href="">大数据优秀产品申报书</a> </li>
+				<li><a class="plan-download-link" href="">大数据优秀应用解决方案申报书</a> </li>
+				<div class="declare_intro">请根据企业实际情况选择大数据优秀产品或应用解决方案申报书下载、若两项都有案例要填报，请下载全部申报书填报后再进入案例上传！</div>
+			</ul>
+
+			<a href="javascript:;" class="enter-scheme">进入案例上传</a>
+		</div>
+	</div>
+
+		<!-- content end -->
+	<script>
+		
+		//上市时间
+		setTimeout(function(){
+			laydate({
+			elem: '#quoted_time',
+			format: 'YYYY-MM-DD',
+			max: laydate.now(),
+			istime: false,
+			istoday: true
+		});	
+		},1000);
+		
+	</script>
+	<script src="./js/fillinfo.js"></script>
+</body>
+</html>

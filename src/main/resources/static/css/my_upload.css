@@ -1,0 +1,270 @@
+
+.main {
+    width:1200px;
+    margin:0 auto;
+    box-sizing: border-box;
+    height: calc(100% - 160px);
+    border: 20px solid #e5e9ec;
+    border-bottom: none;
+    border-top: none
+}
+.main-con {
+    width: 100%;
+    border-bottom:none;
+    box-sizing:border-box;
+    padding:0 20px;
+}
+.main-top .title,.main-bottom .title{
+    font-size:16px;
+    color:#1f1e1e;
+    line-height:60px;
+    border-bottom:1px solid #27619b;
+}
+.top-table { max-height:516px; overflow-x:hidden; overflow-y:auto; margin-top:20px; }
+.top-table::-webkit-scrollbar {
+    width:5px;
+    height:4px;
+}
+.top-table::-webkit-scrollbar-track {
+    background:#fff;
+    border-radius:3px;
+}
+.top-table::-webkit-scrollbar-thumb {
+    border-radius:3px;
+    -webkit-box-shadow:inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color:#2a8beb;
+}
+.top-table table { width:100%; text-align:center; }
+.top-table table tr { line-height:45px; }
+.top-table table thead { height:45px; font-size:16px; color:#1f1e1e; background-color:#bbddff; }
+.top-table table tbody {
+    font-size:14px;
+}
+.top-table table tbody tr td:nth-of-type(2),.top-table table tbody tr td:nth-of-type(3){
+    
+    padding: 0 15px;
+    max-width: 330px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.top-table table tbody tr td a{
+    cursor:pointer;
+    color:#6a98db;
+    display: inline-block;
+}
+.top-table table tbody tr td a.delete_file{
+    margin-left:1.5em;
+}
+
+.main-bottom{
+    margin-top:20px;
+    margin-bottom: 40px;
+}
+
+
+/*查看*/
+.dialog-review{
+    box-sizing:border-box;
+    border-top:none;
+    transform:scale(0);
+    -ms-transform:scale(0);
+    position: fixed;
+    left:0px;
+    top:0 ;
+    width:100%;
+    height: 100%;
+    background:white;
+    transition: all 0.3s;
+}
+.dialog-header{
+    height:30px;
+    line-height:30px;
+    background:#076bce;
+    position: relative;
+    text-align: right;
+    color:white;
+}
+.dialog-title{
+    text-indent:10px;
+    width:80%;
+    float: left;
+    text-align: left;
+    font-size:14px;
+}
+.dialog-close{
+    display: inline-block;
+    text-align: center;
+    margin-right: 10px;
+    color:white;
+    font-size:14px;
+    letter-spacing:2px;
+}
+.dialog-content {
+    width:100%;
+    height:calc(100% - 30px);
+    box-sizing:border-box;
+    border:10px solid #076bce;
+    border-top:none;
+   /* overflow-x:hidden;
+    overflow-y:auto;*/
+}
+#case-preview{
+    width:100%;
+    height:100%;
+}
+
+.left-content{
+    height:100%;
+    box-sizing:border-box;
+    width:100%;
+    float: left;
+    overflow-y:auto;
+}
+
+#case-preview img{
+    margin:0 auto;
+}
+
+
+/*modal*/
+.modal{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0px;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 999999999;
+    color: #fff;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index:99999;
+    display: none;
+}
+.modal_dialog {
+    width: 1000px;
+    height: 1300px;
+    margin:30px auto;
+    background: #fff;
+    border-radius: 5px;
+    color: #1f1e1e;
+    position: relative;
+}
+.modal_dialog .top{
+    height:10px;
+    background-color:#076bce;
+    border-radius:5px 5px  0 0;
+}
+.modal_dialog .close{
+    background: url(../images/icon-list.png) no-repeat -184px -10px;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 8px;
+    right: 3px;
+    cursor: pointer;
+}
+.modal_dialog h3.title{
+    font-size: 24px;
+    text-align:center;
+    padding: 15px 0;
+}
+
+.modal-content table{
+    border-collapse:collapse;
+    font-size: 15px;
+    width: 100%;
+    table-layout:fixed;
+}
+.modal-content table .must{
+    color:red;
+    font-size:16px;
+    vertical-align: middle;
+}
+.modal-content table tr td{
+    border:1px solid #dcdcdc;
+    text-align:center;
+    height: 40px;
+    padding: 0 10px;
+}
+.modal-content ul li{
+    margin:10px 0;
+    text-align: left;
+}
+
+.modal-content table  tr td:nth-child(1){
+    background-color: #d1e8ff;
+    white-space:nowrap;
+    padding:0;
+}
+
+.modal-content .property-box li,.modal-content .business-box li{
+    float:left;
+    width:140px;
+}
+.modal-content td span.prove {
+    font-size:12px;
+    color:gray;
+    margin-bottom: 10px;
+}
+
+.modal-content .tr13,.modal-content .tr14,.modal-content .tr15,.modal-content .tr16,.modal-content .tr17{
+    height:55px;
+}
+
+.modal-content table .bg-color{
+    background-color:#d1e8ff;
+}
+
+.modal-content table tr td input[type='text']{
+    width: 25%;
+    font-size: 15px;
+    border: none;
+    border-bottom: 1px solid rgb(161, 155, 155);
+    text-align: center;
+    outline: none;
+}
+
+.modal-content table input[type="radio"],.modal-content table input[type="checkbox"]{
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+}
+
+tr.honer .honor-box li span {
+    display:inline-block;
+    width:30%;
+    position:relative;
+}
+
+.modal-content .property-last li,.modal-content .business-last li{
+    width:100%;
+}
+
+/*远程html样式*/
+.left-content{
+    padding:40px;
+	line-height: 2em;
+}
+.left-content table{
+    width:100%;
+    margin:30px 0;
+}
+
+.left-content img{
+    display: block;
+    margin:30px 0;
+    
+}
+.left-content{
+	width:100%;
+}
+.left-content table td{
+	height:40px;
+	border:1px solid #dcdcdc;
+	padding:5px; 
+}
+.left-content table td *{
+	font-size:16px !important;
+}

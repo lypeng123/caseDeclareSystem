@@ -1,0 +1,224 @@
+
+.main {
+    width:1200px;
+    margin:0 auto;
+}
+.main-con {
+    width:1200px;
+    /* height:1000px; */
+    border:20px solid #e5e9ec;
+    border-bottom:none;
+    box-sizing:border-box;
+    padding:0 20px;
+    /* margin-bottom:50px; */
+    border-top: none;
+    padding-top: 40px;
+}
+.main-con iframe{
+    height:1200px !important;
+}
+.case-sele {
+    height:40px;
+    line-height:40px;
+    border-bottom:1px solid #185694;
+    /* margin-top:20px; */
+}
+.case-sele li {
+    float:left;
+    width:200px;
+    height:40px;
+    border:1px solid #185694;
+    border-bottom:none;
+    margin-right:10px;
+    border-radius:15px 15px 0 0;
+    text-align:center;
+}
+.case-sele li a {
+    color:#1f1e1e;
+    font-size:16px;
+    width:200px;
+    display:inline-block;
+}
+.case-sele li.current {
+    background-color:#185694;
+}
+.case-sele li.current a {
+    color:#fff;
+}
+
+/*所有提示模态框*/
+.modal {
+    position:fixed;
+    top:-300px;
+    left:-300px;
+    right:-300px;
+    bottom:-300px;
+    background:rgba(0, 0, 0, 0.5);
+    z-index:100000;
+    display:none;
+}
+.modal .modal_dialog {
+    position:fixed;
+    top:50%;
+    left:50%;
+    width:400px;
+    height:250px;
+    margin-left:-200px;
+    margin-top:-110px;
+    background:#fff;
+    border-radius:5px;
+    color:#fff;
+    font-size:16px;
+    overflow:hidden;
+    z-index:999999;
+}
+.modal .title {
+    height:10px;
+    padding-left:20px;
+    line-height:40px;
+    background:#076bce;
+}
+.modal .close {
+    display:inline-block;
+    width:30px;
+    height:30px;
+    background:url(../images/icon-list.png) no-repeat -182px -10px;
+    position:absolute;
+    top:8px;
+    right:1px;
+    cursor:pointer;
+}
+.modal-con {
+    text-align:center;
+}
+.modal-con p {
+    margin:50px auto;
+    color:#1f1f1f;
+    text-align:center;
+    font-size:16px;
+    line-height:26px;
+}
+.modal-con button { width:90px; height:32px; background:#076bce; border:1px solid #076bce; color:#fff; border-radius:5px; font-size:16px; outline:none; cursor:pointer; letter-spacing:2px; }
+
+/*通过*/
+#pass_file button,#pass_file2 button,#pass_file3 button {
+    margin:0 20px;
+}
+/*不通过*/
+.nopass-sele {
+    color:#1f1f1f;
+    margin:30px 0;
+}
+.nopass-sele li {
+    margin:10px 50px;
+    text-align:left;
+}
+.nopass-sele input {
+    color:#1f1f1f;
+    width:15px;
+    height:15px;
+    margin-right:4px;
+}
+#nopass button, #nopass1 button, #nopass2 button, #nopass3 button {
+    margin:0 20px;
+}
+#nopass2 .nopass-sele,#nopass3 .nopass-sele {
+    margin:50px 0;
+}
+
+
+/*查看*/
+.dialog-review{
+    box-sizing:border-box;
+    border-top:none;
+    transform:scale(0);
+    -ms-transform:scale(0);
+    position: fixed;
+    left:0px;
+    top:0 ;
+    width:100%;
+    height: 100%;
+    background:white;
+    transition: all 0.3s;
+}
+.dialog-header{
+    height:30px;
+    line-height:30px;
+    background:#076bce;
+    position: relative;
+    text-align: right;
+    color:white;
+}
+.dialog-title{
+    text-indent:10px;
+    width:80%;
+    float: left;
+    text-align: left;
+    font-size:14px;
+}
+.dialog-close{
+    display: inline-block;
+    text-align: center;
+    margin-right: 10px;
+    color:white;
+    font-size:14px;
+    letter-spacing:2px;
+}
+.dialog-content{
+    width:100%;
+    height: calc(100% - 30px );
+    box-sizing:border-box;
+    border:10px solid #076bce;
+    border-top: none;
+   /* overflow-x:hidden;
+    overflow-y:auto;*/
+}
+#case-preview{
+    width:100%;
+    height:100%;
+}
+
+.left-content{
+    height:100%;
+    box-sizing:border-box;
+    width:100%;
+    float: left;
+}
+
+#login_none{
+    display:inline-block;
+    padding:7px 25px;
+    border-radius:5px;
+    background-color:#076bce;
+    color:#fff;
+    font-size:16px;
+}
+
+/*远程html样式*/
+.left-content{
+	line-height: 2em;
+}
+.left-content table{
+    width:100%;
+    margin:30px 0;
+}
+
+.left-content img{
+    display: block;
+    margin:30px 0;
+    
+}
+.left-content{
+    width:100%;
+}
+.left-content table td{
+	height:40px;
+	border:1px solid #dcdcdc;
+	padding:5px; 
+}
+.left-content table td *{
+	font-size:16px !important;
+}
+
+
+
