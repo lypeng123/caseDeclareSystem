@@ -343,7 +343,7 @@ $(function () {
                 //console.log(res);
                 if (res.state == 1) {
                     //跳转到change.html 页面
-                    window.location.href="case-query.html";
+                    window.location.href="user-case-list.html";
                 } else if (res.state == 0) {
                     new Dialog().init({
                         mask: true,
