@@ -91,12 +91,6 @@
 		) f
 	</select>
 
-	<!--根据id查询用户信息-->
-	<!--SELECT * FROM d_user_info WHERE user_id='0668b82f-92a8-4765-b01d-fdfa333f3b2a'-->
-	<select id="findUserById" parameterType="java.lang.String" resultType="java.util.HashMap">
-		SELECT * FROM d_user_info WHERE user_id=#{user_id}
-	</select>
-
 	<!--根据id删除用户信息-->
 	<!--DELETE FROM d_user_info WHERE user_id='0eba982e-8661-48d4-983e-f06f6e4a70c7'-->
 	<delete id="deleteUserById" parameterType="java.lang.String">
@@ -149,5 +143,29 @@
 		SELECT declare_id
 		FROM d_user_declare_rel
 		WHERE user_id = #{user_id}
+	</select>
+
+	<!-- 获取性质ID -->
+	<select id="selectPropertyId" resultType="java.lang.String">
+		SELECT property_id FROM d_declare_property_rel WHERE declare_id = #{declare_id}
+	</select>
+
+	<!-- 获取关联的主营业务数据 -->
+	<select id="getbusinessInfo" resultType="java.util.HashMap">
+		SELECT business_id
+		FROM d_declare_business_rel
+		WHERE declare_id = #{declare_id}
+	</select>
+
+	<!-- 获取关联的荣誉数据 -->
+	<select id="getHonorInfo" resultType="java.util.HashMap">
+		SELECT honor_id,honor_level,get_year
+		FROM d_declare_honor_rel
+		WHERE declare_id = #{declare_id}
+	</select>
+
+	<!--根据id获取该用户下所有的申报案例-->
+	<select id="findCaseByUserId" parameterType="java.lang.String" resultType="java.util.Map">
+		SELECT * FROM d_case_screen WHERE user_id = #{user_id}
 	</select>
 </mapper>

@@ -36,13 +36,6 @@ public interface UserManageMapper {
     Integer selectCount(Map<String,Object> map);
 
     /**
-     * 根据id查询账户信息
-     * @param user_id
-     * @return
-     */
-    Map<String,Object> findUserById(@Param("user_id") String user_id);
-
-    /**
      * 删除用户
      * @param user_id
      * @return
@@ -85,4 +78,21 @@ public interface UserManageMapper {
      * @return
      */
     String selectPropertyId(@Param("declare_id") String declare_id);
+
+    /**
+     * 获取关联的主营业务数据
+     *
+     * @param declare_id
+     *            申报ID
+     * @return
+     */
+    public List<Map<String, Object>> getbusinessInfo(@Param("declare_id") String declare_id);
+
+    /**
+     * 获取关联的荣誉数据
+     *
+     * @param declare_id
+     * @return
+     */
+    public List<Map<String, Object>> getHonorInfo(@Param("declare_id") String declare_id);
 }

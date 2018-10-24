@@ -62,8 +62,20 @@ var historicalDataBrowseUrl = path+'/historicalCase/getDeclareInfo';//获取历�
 //账户管理
 var userManageUrl = path + '/userManage/getUserInfo';//获取用户信息
 
-//获取用户所有信息
-var userAllData=path+'/userManage/allDatas'
+//修改用户账号时获取用户所有信息
+var userAllData=path+'/userManage/allDatas';
+
+//用户id传入request域
+var setUserIdUrl = path+'/userManage/setUserIdUrl';
+
+var modifyBusinessInfoDatas = path + '/userManage/businessInfoDatas'; //登陆后获取页面主营业务数据
+var modifyHonorInfoDatas = path + '/userManage/honorInfoDatas'; //登陆后获取相关荣誉数据
+
+//管理员修改用户信息后保存
+var modifySaveUrl = path +'/userManage/opeationDatas';
+
+//管理员根据用户id查看对应案例
+var checkCaseByUserIdUrl = path + '/userManage/findCaseByUserId';
 
 //网页JS错误日志上报:仅上报登录页,注册页,以及其他已登录站内页面
 

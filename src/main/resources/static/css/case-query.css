@@ -103,6 +103,12 @@ table{
 	color: rgb(106, 152, 219);
 }
 
+#checkCase{
+	cursor: pointer;
+	/*color:initial;*/
+	color: rgb(106, 152, 219);
+}
+
 .preview.off{
 	color:#999;
 	cursor: not-allowed

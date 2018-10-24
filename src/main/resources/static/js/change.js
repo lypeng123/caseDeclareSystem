@@ -100,7 +100,7 @@ window.onload = function () {
 		//登陆后获取页面主营业务数据
 		$.ajax({
 			type: 'post',
-			url: businessInfoDatas,
+			url: modifyBusinessInfoDatas,
 			success: function (res) {
 				if (res.state == 1) {
 					res.data.forEach(function (item) {
@@ -145,7 +145,7 @@ window.onload = function () {
 		//登陆后获取相关荣誉数据
 		$.ajax({
 			type: 'post',
-			url: honorInfoDatas,
+			url: modifyHonorInfoDatas,
 			success: function (res) {
 				if (res.state == 1) {
 
@@ -433,7 +433,7 @@ window.onload = function () {
 			DataTemplet['user_id'] = JSON.parse(sessionStorage.getItem('userInfo')).user_id;
 			$.ajax({
 				type: 'post',
-				url: saveUrl,
+				url: modifySaveUrl,
 				success: function (res) {
 					if (res.state == 1) {
 

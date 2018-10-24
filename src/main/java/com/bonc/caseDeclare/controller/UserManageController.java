@@ -51,33 +51,6 @@ public class UserManageController {
     }
 
     /**
-     * 根据用户id查询用户信息
-     * @param request
-     * @return
-     */
-    @RequestMapping("/findUserById")
-    public JsonResult<Object> findUserById(HttpServletRequest request,String user_id){
-        String ipAddr = IPvalidateUtil.getIpAddr(request).split(",")[0];// 访问的ip
-        logger.info("IP为：【"+ipAddr+"】查询了用户"+user_id+"的用户信息");
-        JsonResult<Object> userById = userManageService.findUserById(user_id);
-        logger.info("用户"+user_id+"的用户信息："+userById);
-        return userById;
-    }
-
-    /**
-     * 修改用户信息
-     * @param request
-     * @param user_id
-     * @return
-     */
-    @RequestMapping("/updateUserById")
-    public JsonResult<Object> updateById(HttpServletRequest request,String user_id){
-        String ipAddr = IPvalidateUtil.getIpAddr(request).split(",")[0];// 访问的ip
-        logger.info("IP为：【"+ipAddr+"】修改了用户"+user_id+"的用户信息");
-        return userManageService.updateUserById(request,user_id,ipAddr);
-    }
-
-    /**
      * 删除用户信息
      * @param request
      * @param user_id
@@ -86,18 +59,19 @@ public class UserManageController {
     @RequestMapping("/deleteUserById")
     public JsonResult<Object> deleteUserById(HttpServletRequest request,String user_id){
         String ipAddr = IPvalidateUtil.getIpAddr(request).split(",")[0];// 访问的ip
-        logger.info("IP为：【"+ipAddr+"】修改了用户"+user_id+"的用户信息");
+        logger.info("IP为：【"+ipAddr+"】删除了用户"+user_id+"的用户信息");
         return userManageService.deleteUserById(user_id);
     }
 
     /**
      * 根据用户id该用户所有案例列表，查询案例时调用
      * @param request
-     * @param user_id
      * @return
      */
     @RequestMapping("/findCaseByUserId")
-    public JsonResult<Object> findCaseByUserId(HttpServletRequest request,String user_id){
+    public JsonResult<Object> findCaseByUserId(HttpServletRequest request){
+        String user_id =(String) request.getSession().getAttribute("userId");
+
         String ipAddr = IPvalidateUtil.getIpAddr(request).split(",")[0];// 访问的ip
         logger.info("IP为：【"+ipAddr+"】查看了用户"+user_id+"的案例信息");
         return userManageService.findCaseByUserId(user_id);
@@ -125,7 +99,9 @@ public class UserManageController {
     @RequestMapping("/allDatas")
     public JsonResult<Object> allDatas(HttpServletRequest request, HttpServletResponse response) {
 
-        String user_id = request.getParameter("user_id");
+        //String user_id = request.getParameter("userId");
+        //String user_id = (String) request.getAttribute("userId");
+        String user_id =(String) request.getSession().getAttribute("userId");
 
         if (user_id == null || user_id.equals("")) {
             logger.info("获取所有数据：参数有误");
@@ -135,5 +111,55 @@ public class UserManageController {
         Object allDatas = userManageService.allDatas(user_id);
 
         return new JsonResult<>(allDatas);
+    }
+
+    @RequestMapping("/setUserIdUrl")
+    public JsonResult<Object> setUserIdUrl(HttpServletRequest request){
+        String userId = request.getParameter("userId");
+        request.getSession().setAttribute("userId", userId);
+        return new JsonResult<>(JsonResult.SUCCESS,"成功存入");
+    }
+
+    /**
+     * 获取关联的主营业务数据
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("/businessInfoDatas")
+    public JsonResult<Object> businessInfoDatas(HttpServletRequest request, HttpServletResponse response) {
+        String user_id =(String) request.getSession().getAttribute("userId");
+
+        return userManageService.getBusinessInfo(user_id);
+
+    }
+
+    /**
+     * 获取关联的荣誉数据
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("/honorInfoDatas")
+    public JsonResult<Object> honorInfoDatas(HttpServletRequest request, HttpServletResponse response) {
+        String user_id =(String) request.getSession().getAttribute("userId");
+
+        return userManageService.getHonorInfo(user_id);
+    }
+
+    /**
+     * 管理员修改用户界面保存按钮的操作
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("/opeationDatas")
+    //@Async("mqExecutor")
+    public JsonResult<Object> opeationDatas(HttpServletRequest request, HttpServletResponse response) {
+        return userManageService.updateAllDatas(request);
+
     }
 }

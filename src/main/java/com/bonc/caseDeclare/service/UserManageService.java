@@ -26,20 +26,6 @@ public interface UserManageService {
     JsonResult<Object> allDeclareCompanyAccount(HttpServletRequest request);
 
     /**
-     * 根据id查询用户信息
-     * @param user_id
-     * @return
-     */
-    JsonResult<Object> findUserById(String user_id);
-
-    /**
-     * 根据id修改用户信息
-     * @param user_id
-     * @return
-     */
-    JsonResult<Object> updateUserById(HttpServletRequest request,String user_id,String ipAddr);
-
-    /**
      * 根据id删除用户信息
      * @param user_id
      * @return
@@ -66,4 +52,26 @@ public interface UserManageService {
      * @return
      */
     Object allDatas(String user_id);
+
+    /**
+     * 根据用户id获取主营业务
+     * @param user_id
+     * @return
+     */
+    JsonResult<Object> getBusinessInfo(String user_id);
+
+    /**
+     * 根据用户id获取相关荣誉
+     * @param user_id
+     * @return
+     */
+    JsonResult<Object> getHonorInfo(String user_id);
+
+    /**
+     * 申报表数据新增或修改
+     *
+     * @param request
+     * @return
+     */
+    public JsonResult<Object> updateAllDatas(HttpServletRequest request);
 }
