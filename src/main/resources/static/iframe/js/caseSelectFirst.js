@@ -146,7 +146,8 @@ $(function () {
                     } else {
                         $("#table_mark").show();
                         $(".table-file .data-none").hide();
-                        var list = res.data.pageBeanMysql.data;
+                        //var list = res.data.pageBeanMysql.data;
+                        var list = res.data.data;
 
                         getfileHtml = ' <thead> <tr> <th>文件号</th> <th>申报公司</th> <th><span class="sele-all">全选</span>申报文件</th><th>提交时间</th> <th>操作</th> </tr> </thead> <tbody>';
 

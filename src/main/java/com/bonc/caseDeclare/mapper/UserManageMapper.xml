@@ -166,6 +166,8 @@
 
 	<!--根据id获取该用户下所有的申报案例-->
 	<select id="findCaseByUserId" parameterType="java.lang.String" resultType="java.util.Map">
-		SELECT * FROM d_case_screen WHERE user_id = #{user_id}
+		SELECT a.*
+		FROM d_case_screen a
+		WHERE user_id = #{user_id}
 	</select>
 </mapper>

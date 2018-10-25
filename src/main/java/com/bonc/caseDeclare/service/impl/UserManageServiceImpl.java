@@ -245,6 +245,7 @@ public class UserManageServiceImpl implements UserManageService {
         if (user_id == null || "".equals(user_id)) {
             return new JsonResult<>(JsonResult.ERROR, "用户id为空");
         }
+
         //调用userManageMapper查询该用户对应的所有案例
         List<Map<String, Object>> caseByUserId = userManageMapper.findCaseByUserId(user_id);
         logger.info("查询结果：" + caseByUserId);
