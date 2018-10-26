@@ -321,7 +321,7 @@ $(function () {
             //调用方法向后台传递id
             sendUserId(e);
         }else if(e.target.id=='checkCase'){
-            alert("查看案例");
+            //alert("查看案例");
             checkCase(e);
         }
     });
@@ -330,7 +330,7 @@ $(function () {
     function checkCase(e){
         var customData = $(e.target).parents('tr').data();
         var userId = customData.user_id;
-        alert(userId);
+        //alert(userId);
         //调用ajax
         $.ajax({
             type: 'post',
@@ -376,7 +376,7 @@ $(function () {
     function sendUserId(e) {
         var customData = $(e.target).parents('tr').data();
         var userId = customData.user_id;
-        alert(userId);
+        //alert(userId);
         //调用ajax
         $.ajax({
             type: 'post',

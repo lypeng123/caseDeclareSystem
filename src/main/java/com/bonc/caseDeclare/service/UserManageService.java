@@ -74,4 +74,12 @@ public interface UserManageService {
      * @return
      */
     public JsonResult<Object> updateAllDatas(HttpServletRequest request);
+
+    /**
+     * 删除上传案例案例附件
+     * @param response
+     * @param request
+     * @return
+     */
+    public JsonResult<Object> deletePlanFile(HttpServletResponse response, HttpServletRequest request);
 }

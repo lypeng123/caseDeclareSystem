@@ -95,4 +95,58 @@ public interface UserManageMapper {
      * @return
      */
     public List<Map<String, Object>> getHonorInfo(@Param("declare_id") String declare_id);
+
+    /**
+     * 删除上传的产品文件(真删)
+     * @param product_id	产品文件ID
+     * @return
+     */
+    boolean deleteProductWord(@Param("product_id")String product_id);
+
+    /**
+     * 删除上传的方案文件(真删)
+     * @param plan_id	方案文件ID
+     * @return
+     */
+    boolean deletePlanWord(@Param("plan_id")String plan_id);
+
+    /**
+     * 删除筛选表数据
+     * @param company_name	公司名称
+     * @param file_name	重命名后的文件名
+     * @return
+     */
+    boolean deleteScreenTable(@Param("company_name")String company_name,@Param("file_name")String file_name);
+
+    /**
+     * 删除产品文件(假删)
+     *
+     * @param product_id
+     *            产品文件ID
+     * @return
+     */
+    public boolean updateDeleteProductWord(@Param("product_id") String product_id);
+
+    /**
+     * 删除方案文件(假删)
+     *
+     * @param plan_id
+     *            方案文件ID
+     * @return
+     */
+    public boolean updateDeletePlanWord(@Param("plan_id") String plan_id);
+
+    /**
+     * 查看状态是否存在不可操作项
+     * @param declare_id	申报表ID
+     * @return
+     */
+    public List<Map<String,Object>> checkState(@Param("declare_id")String declare_id);
+
+    /**
+     * 根据用户申报id查找方案id
+     * @param declare_id
+     * @return
+     */
+    String findPlanId(@Param("declare_id") String declare_id);
 }

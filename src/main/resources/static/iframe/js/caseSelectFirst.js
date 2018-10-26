@@ -186,6 +186,7 @@ $(function () {
     }
 
     var seleNone = parent.document.getElementById("seleNone");
+    var seleNone1 = parent.document.getElementById("seleNone1");
     var pass_file = parent.document.getElementById("pass_file");
     var pass_list = parent.document.getElementById("pass_list");
     var nopass = parent.document.getElementById("nopass");

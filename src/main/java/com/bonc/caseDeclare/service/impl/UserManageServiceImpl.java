@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.*;
 
 @Service
@@ -634,6 +636,54 @@ public class UserManageServiceImpl implements UserManageService {
         Object userData = declareInfoMapper.getUserInfo2(user_id, property_id);
         //logger.info("所有结果"+userData);
         return new JsonResult<>(JsonResult.SUCCESS, "ok", userData);
+    }
+
+    /**
+     * 销毁方案文件
+     * @param response
+     * @param request
+     * @return
+     */
+    public JsonResult<Object> deletePlanFile(HttpServletResponse response, HttpServletRequest request) {
+        String declare_id = request.getParameter("declare_id");
+        String filepath = request.getParameter("file_path");
+        String html_path = request.getParameter("html_path");
+        String company_name = request.getParameter("company_name");
+        String file_name = request.getParameter("file_name");
+        //String plan_id = request.getParameter("plan_id");
+        //根据declare_id查找plan_id
+        String plan_id=userManageMapper.findPlanId(declare_id);
+        if (filepath == null || filepath.equals("") || plan_id == null || plan_id.equals("") || company_name == null
+                || company_name.equals("") || file_name == null || file_name.equals("") || declare_id == null
+                || declare_id.equals("")) {
+            logger.info("删除方案文件：参数有误");
+            return new JsonResult<>("参数有误");
+        }
+
+        List<Map<String, Object>> checkState = userManageMapper.checkState(declare_id);
+        if (checkState == null || checkState.size() == 0) {
+            logger.info("无法进行此项操作");
+            return new JsonResult<>("无法进行此项操作");
+        }
+
+        File file = new File(filepath);
+        File file2 = new File(html_path);
+        if (file.exists()) {
+            file.delete();
+            if (file2.exists()) {
+                file2.delete();
+                boolean deletePlanWord = userManageMapper.deletePlanWord(plan_id);
+                if (deletePlanWord == false) {
+                    return new JsonResult<>("文件删除失败");
+                }
+                boolean deleteScreenTable = userManageMapper.deleteScreenTable(company_name, file_name);
+                if (deleteScreenTable == false) {
+                    return new JsonResult<>("筛选信息删除失败，请联系管理员删除");
+                }
+                return new JsonResult<>(JsonResult.SUCCESS, "已删除");
+            }
+        }
+        return new JsonResult<>("删除失败,未找到相应文件");
     }
 
 }

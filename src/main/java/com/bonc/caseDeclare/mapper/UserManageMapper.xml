@@ -170,4 +170,44 @@
 		FROM d_case_screen a
 		WHERE user_id = #{user_id}
 	</select>
+
+	<!-- 删除产品文件(假删) -->
+	<update id="updateDeleteProductWord" parameterType="java.lang.String">
+		UPDATE
+		d_product_upload SET state = '0' WHERE product_id = #{product_id}
+	</update>
+
+	<!-- 删除方案文件(假删) -->
+	<update id="updateDeletePlanWord" parameterType="java.lang.String">
+		UPDATE
+		d_plan_upload SET state = '0' WHERE plan_id = #{plan_id}
+	</update>
+
+	<!-- 检查是否存在审核中的案例 -->
+	<select id="checkState" resultType="java.util.HashMap">
+		SELECT *
+		FROM d_case_screen
+		WHERE declare_id = #{declare_id}
+		AND audit_state != '-2'
+		AND audit_state != '0'
+
+	</select>
+
+	<!-- 删除上传产品文件(真删) -->
+	<delete id="deleteProductWord" parameterType="java.lang.String">
+		DELETE FROM
+		d_product_upload WHERE product_id = #{product_id}
+	</delete>
+
+	<!-- 删除上传方案文件(真删) -->
+	<delete id="deletePlanWord" parameterType="java.lang.String">
+		DELETE FROM
+		d_plan_upload WHERE plan_id = #{plan_id}
+	</delete>
+
+	<!--根据申报id查找方案id-->
+	<select id="findPlanId" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT plan_id FROM d_plan_upload
+		WHERE declare_id=#{declare_id}
+	</select>
 </mapper>

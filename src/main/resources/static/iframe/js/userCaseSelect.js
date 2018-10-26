@@ -150,17 +150,50 @@ $(function () {
                         //var list = res.data.pageBeanMysql.data;
                         var list = res.data;
 
-                        getfileHtml = ' <thead> <tr> <th>文件号</th> <th>申报公司</th> <th>申报文件</th><th>审核选项</th><th>提交时间</th> <th>操作</th> </tr> </thead> <tbody>';
+                        getfileHtml = ' <thead> <tr> <th>文件号</th> <th>申报公司</th> <th>申报文件</th> <th>审核状态</th> <th>审核选项</th><th>提交时间</th> <th>操作</th> </tr> </thead> <tbody>';
 
                         for (var i = 0; i < list.length; i++) {
                             var upload_time = new Date(list[i].upload_time);
                             var uploadTime = infoDateChange(upload_time);
+                            var file_path=list[i].file_path;
+                            var old_file_name=list[i].old_file_name;
+                            var declare_id=list[i].declare_id;
+                            var plan_id = list[i].plan_id;
+                            var file_name = list[i].file_name;
+                            var company_name = list[i].company_name;
+
+                            //格式化参数
+                            var download_file_path = format_file_path(file_path,old_file_name); //下载链接
+                            var return_file_path = format_file_return(file_path,old_file_name,declare_id,plan_id,file_name,company_name);//退回连接
+                            format_upload_time(list[i]); //上传时间
+
+                            if (list[i].audit_state == '0') {
+                                list[i].audit_state = '进入初审';
+                            } else if (list[i].audit_state == '1') {
+                                list[i].audit_state = '进入中审';
+                            } else if (list[i].audit_state == '2') {
+                                list[i].audit_state = '进入终审';
+                            } else if (list[i].audit_state == '3') {
+                                list[i].audit_state = '成功入选';
+                            } else if (list[i].audit_state == '-1') {
+                                list[i].audit_state = '未入选';
+                            } else if (list[i].audit_state == '-2') {
+                                list[i].audit_state = '初审补充材料';
+                            }
 
                             //getfileHtml += '<tr ' + setDataString(list[i]) + '> <td>' + list[i].file_code + '</td> <td>' + list[i].company_name + '</td> <td><span data-code="' + list[i].file_code + '" data-id="' + list[i].user_id + '" class="sele-icon no-icon"></span>' + list[i].old_file_name + '</td><td><span><button>通过</button><button>不通过</button></span></td><td>' + uploadTime + '</td> <td><span class="preview_file" data-file=' + list[i].old_file_name + ' data-user_id="' + list[i].user_id + '">查看</span></td> </tr>';
-                            getfileHtml += '<tr ' + setDataString(list[i]) + '> <td>' + list[i].file_code + '</td> <td>' + list[i].company_name + '</td> <td><span data-code="' + list[i].file_code + '" data-id="' + list[i].user_id + '" class="sele-icon no-icon"></span>' + list[i].old_file_name + '</td><td class="audit_state">' +
-                                '<span><input name="Fruit" type="radio" value="2"/>首轮通过</span><br>' +
-                                '<span><input name="Fruit" type="radio" value="3"/>次轮通过</span><br>' +
-                                '<span><input name="Fruit" type="radio" value="4"/>三轮通过</span>' +
+                            //getfileHtml += '<tr ' + setDataString(list[i]) + '> <td>' + list[i].file_code + '</td> <td>' + list[i].company_name + '</td> <td><span data-code="' + list[i].file_code + '" data-id="' + list[i].user_id + '" class="sele-icon no-icon"></span>' + list[i].old_file_name + '</td><td class="audit_state">' +
+                            getfileHtml += '<tr ' + setDataString(list[i]) + '> <td>' + list[i].file_code + '</td> <td>' + list[i].company_name + '</td> ' +
+                                '<td><span data-code="' + list[i].file_code + '" data-id="' + list[i].user_id + '" class="sele-icon no-icon"></span>' + list[i].old_file_name +
+                                '<br><a href="'+download_file_path+'" class="download_file" ><font color="#6495ed">下载</font></a>'+
+                                '<a href="'+return_file_path+'" class="return_file" ><font color="#6495ed">退回</font></a></td>' +
+                                '<td>'+list[i].audit_state+'</td><td class="audit_state">' +
+                                '<span>初审<input name="Fruit'+i+'" type="radio" value="1"/>通过</span>' +
+                                '<span><input name="Fruit'+i+'" type="radio" value="0"/>淘汰</span><br>' +
+                                '<span>中审<input name="Fruit'+i+'" type="radio" value="2"/>通过</span>' +
+                                '<span><input name="Fruit'+i+'" type="radio" value="1"/>淘汰</span><br>' +
+                                '<span>终审<input name="Fruit'+i+'" type="radio" value="3"/>通过</span>' +
+                                '<span><input name="Fruit'+i+'" type="radio" value="2"/>淘汰</span>' +
                                 '</td><td>' + uploadTime + '</td> <td><span class="preview_file" data-file=' + list[i].old_file_name + ' data-user_id="' + list[i].user_id + '">查看</span></td> </tr>';
                         }
                         getfileHtml += '</tbody>';
@@ -191,7 +224,24 @@ $(function () {
         });
     }
 
+    //下载路径拼接
+    function format_file_path(file_path,old_file_name) {
+        file_path = downLoadWordUrl + '?old_file_name=' + old_file_name + '&file_path=' + file_path;
+        return file_path;
+    };
+
+    //退回路劲拼接
+    function format_file_return(file_path,old_file_name,declare_id,plan_id,file_name,company_name) {
+        file_path = returnWordUrl + '?old_file_name=' + old_file_name + '&file_path=' + file_path +'&declare_id=' + declare_id +'&plan_id=' + plan_id +'&file_name=' + file_name +'&company_name=' + company_name;
+        return file_path;
+    };
+
+    function format_upload_time(item) {
+        item.upload_time = new Date(item.upload_time).toLocaleDateString();
+    };
+
     var seleNone = parent.document.getElementById("seleNone");
+    var seleNone1 = parent.document.getElementById("seleNone1");
     var pass_file = parent.document.getElementById("pass_file");
     var pass_list = parent.document.getElementById("pass_list");
     var nopass = parent.document.getElementById("nopass");
@@ -227,8 +277,8 @@ $(function () {
         $(pass_file).css("display", "none");
         $(pass_list).css("display", "block");
         //var audit_state2 = 1;
-        var audit_state2=$('.audit_state input[name="Fruit"]:checked').val();
-        alert(audit_state2);
+        var audit_state2=$('.audit_state input[type="radio"]:checked').val();
+        //alert(audit_state2);
         editCaseScreen(audit_state2);
     });
 
@@ -248,6 +298,10 @@ $(function () {
         $(nopass).hide();
     });
 
+    //点击下载
+    $(".download_file").on("click",  function (e) {
+        alert("点击下载");
+    });
 
 
     //查看清单
@@ -270,11 +324,11 @@ $(function () {
         };
         $(".sele-icon.is-icon").each(function () {
             if(audit_state2==1){
-                alert(audit_state2);
+               // alert(audit_state2);
             }else if(audit_state2==2){
-                alert(audit_state2);
+               // alert(audit_state2);
             }else if(audit_state2==3){
-                alert(audit_state2);
+               // alert(audit_state2);
             }
             screen_param.file_codes.push({ file_code: $(this).data("code") });
             screen_param.user_ids.push({ user_id: $(this).data("id") });
@@ -408,6 +462,9 @@ $(function () {
         $(seleNone).css("display", "none");
     });
 
+    $(seleNone).on("click", "span.close", function () {
+        $(seleNone).css("display", "none");
+    });
     $(seleNone).on("click", "#select_none1", function () {
         $(seleNone).css("display", "none");
     });

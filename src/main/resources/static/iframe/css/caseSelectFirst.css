@@ -120,6 +120,13 @@ body {
     cursor:pointer;
     color:#6a98db;
 }
+
+.table_mark tbody .download_file {
+    width:70px;
+    cursor:pointer;
+    color:#6a98db;
+}
+
 .table_mark .sele-all {
     position:absolute;
     width:30px;
